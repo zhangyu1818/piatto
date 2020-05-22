@@ -2,7 +2,7 @@
   "compilerOptions": {
     "baseUrl": "./",
     "paths": {
-      "zyui": ["components/index.tsx"]
+      "piatto": ["components/index.tsx"]
     },
     "strictNullChecks": true,
     "moduleResolution": "node",
