@@ -19,6 +19,7 @@
     "babel-loader": "^8.1.0",
     "husky": "^4.2.5",
     "less-loader": "^6.1.0",
+    "less-plugin-functions": "^1.0.0",
     "lint-staged": "^10.2.4",
     "prettier": "^2.0.5",
     "stylelint": "^13.5.0",

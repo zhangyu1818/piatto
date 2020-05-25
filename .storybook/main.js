@@ -1,4 +1,5 @@
 const path = require('path');
+const LessPluginFunctions = require('less-plugin-functions');
 
 module.exports = {
   webpackFinal: (config) => {
@@ -12,6 +13,7 @@ module.exports = {
           options: {
             lessOptions: {
               javascriptEnabled: true,
+              plugins: [new LessPluginFunctions()],
             },
           },
         },

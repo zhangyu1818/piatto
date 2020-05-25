@@ -1,6 +1,8 @@
 @import 'components/styles/theme';
 
-.rem(@property, @px) {
-  @{property}: unit(@px / @vw-fontsize, rem);
-  @rem-value: unit(@px / @vw-fontsize, rem);
+// function,return rem
+// https://github.com/seven-phases-max/less-plugin-functions
+.function-rem(@px) {
+  // stylelint-disable-next-line
+  return: unit(@px / @vw-fontsize, rem);
 }

@@ -6,14 +6,14 @@
 
 .@{button-prefix-class} {
   position: relative;
+  height: rem(@btn-normal-size);
   padding: 0 @padding-normal;
+  font-size: rem(@font-size-base);
   border: 1px solid transparent;
+  border-radius: rem(@border-radius-base);
   outline: none;
   transition: all @ease-in-out @animation-duration-fast;
   user-select: none;
-  .rem(height,@btn-normal-size);
-  .rem(font-size,@font-size-base);
-  .rem(border-radius,@border-radius-base);
 
   &::before {
     position: absolute;
@@ -31,7 +31,7 @@
   }
 
   &-icon {
-    .rem(margin-right,@margin-xs);
+    margin-right: rem(@margin-xs);
   }
 
   > span {
