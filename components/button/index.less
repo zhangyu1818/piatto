@@ -1,0 +1,89 @@
+@import '../styles/base';
+@import '../styles/theme';
+@import '../styles/utils/rem';
+
+@button-prefix-class: ~'@{prefix-class}-button';
+
+.@{button-prefix-class} {
+  position: relative;
+  padding: 0 @padding-normal;
+  border: 1px solid transparent;
+  outline: none;
+  transition: all @ease-in-out @animation-duration-fast;
+  user-select: none;
+  .rem(height,@btn-normal-size);
+  .rem(font-size,@font-size-base);
+  .rem(border-radius,@border-radius-base);
+
+  &::before {
+    position: absolute;
+    top: -1px;
+    right: -1px;
+    bottom: -1px;
+    left: -1px;
+    z-index: 1;
+    display: none;
+    background: @white;
+    border-radius: inherit;
+    opacity: 0.35;
+    content: '';
+    pointer-events: none;
+  }
+
+  &-icon {
+    .rem(margin-right,@margin-xs);
+  }
+
+  > span {
+    display: inline-block;
+  }
+
+  // default
+  &.@{button-prefix-class}-default {
+    color: @btn-default-color;
+    background: @white;
+    border-color: @border-color-base;
+    &:active {
+      background: @white-darken;
+    }
+  }
+
+  // primary
+  &.@{button-prefix-class}-primary {
+    color: @btn-primary-color;
+    background: @primary-color;
+    border-color: @primary-color;
+    &:active {
+      background: @primary-color-5;
+    }
+  }
+
+  // link
+  &.@{button-prefix-class}-link {
+    color: @primary-color;
+    &:active {
+      color: @primary-color-4;
+    }
+  }
+
+  // disabled
+  &[disabled] {
+    color: @btn-disabled-color;
+    background: @btn-disabled-bg;
+    pointer-events: none;
+  }
+
+  // loading
+  &.@{button-prefix-class}-loading:not([disabled]) {
+    pointer-events: none;
+    &::before {
+      display: block;
+    }
+  }
+
+  // block
+  &.@{button-prefix-class}-block {
+    display: block;
+    width: 100%;
+  }
+}
