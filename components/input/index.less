@@ -1,0 +1,87 @@
+@import '../styles/base';
+@import '../styles/theme';
+@import '../styles/utils/rem';
+
+@input-prefix-class: ~'@{prefix-class}-input';
+
+.input-divider() {
+  display: inline-block;
+  width: @border-width-base;
+  height: 33%;
+  margin: 0 @margin-normal;
+  background: @border-color-base;
+  content: '';
+}
+
+.@{input-prefix-class} {
+  display: inline-flex;
+  align-items: center;
+  height: rem(@input-normal-size);
+  padding: rem(@padding-xs) rem(@padding-normal);
+  color: @input-default-color;
+  font-size: rem(@font-size-base);
+  background: @white;
+  border: @border-width-base solid @border-color-base;
+  border-radius: @border-radius-base;
+  transition: all @ease-in-out @animation-duration-slow;
+  // use focus-within to simulate the focus effect
+  &:focus-within {
+    border-color: @primary-color-5;
+    box-shadow: 0 0 0 rem(@box-shadow-spread) fade(@primary-color-5, 20%);
+  }
+
+  input {
+    flex: 1;
+    padding: 0;
+    color: inherit;
+    font-size: inherit;
+    border: none;
+    outline: none;
+    &::placeholder {
+      color: @input-placeholder-color;
+    }
+  }
+
+  // block
+  &.@{input-prefix-class}-block {
+    display: flex;
+  }
+
+  // prefix,suffix,addon before,addon after
+  &-prefix,
+  &-suffix,
+  &-addon-before,
+  &-addon-after {
+    display: flex;
+    flex: none;
+    align-items: center;
+    height: 100%;
+    font-size: inherit;
+  }
+  &-prefix {
+    padding-right: @padding-normal;
+  }
+  &-suffix {
+    padding-left: @padding-normal;
+  }
+  // addon before divider
+  &-addon-before::after {
+    .input-divider();
+  }
+  // addon after divider
+  &-addon-after::before {
+    .input-divider();
+  }
+
+  // clear icon
+  &-clear-icon {
+    display: flex;
+    align-items: center;
+    height: 100%;
+    padding-left: rem(@padding-sm);
+    color: @input-clear-icon-color;
+    &-hidden {
+      visibility: hidden;
+    }
+  }
+}
