@@ -44,6 +44,10 @@
 @text-color-secondary: fade(#000, 45%);
 @text-color-inverse: @white;
 
+// disable
+@disabled-color: fade(#000, 25%);
+@disabled-bg: hsv(0, 0, 96%);
+
 // border
 
 @border-width-base: 1px;
@@ -63,8 +67,8 @@
 @btn-default-color: @text-color;
 @btn-primary-color: @text-color-inverse;
 
-@btn-disabled-color: @text-color-secondary;
-@btn-disabled-bg: darken(@white, 10%);
+@btn-disabled-color: @disabled-color;
+@btn-disabled-bg: @disabled-bg;
 
 // loading
 
