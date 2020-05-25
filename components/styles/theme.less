@@ -1,0 +1,73 @@
+@import './utils/colorPalette';
+
+@vw-fontsize: 75;
+@vw-design: 750;
+
+@prefix-class: piatto;
+
+@font-size-base: 32px;
+
+// border-radius
+@border-radius-base: 4px;
+
+// padding
+@padding-large: 32px;
+@padding-normal: 24px;
+@padding-sm: 16px;
+@padding-xs: 8px;
+
+// margin
+
+@margin-large: @padding-large;
+@margin-normal: @padding-normal;
+@margin-sm: @padding-sm;
+@margin-xs: @padding-xs;
+
+// color
+
+@primary-color: #0d3190;
+@primary-color-1: color(~`colorPalette('@{primary-color-6}', 1) `);
+@primary-color-2: color(~`colorPalette('@{primary-color-6}', 2) `);
+@primary-color-3: color(~`colorPalette('@{primary-color-6}', 3) `);
+@primary-color-4: color(~`colorPalette('@{primary-color-6}', 4) `);
+@primary-color-5: color(~`colorPalette('@{primary-color-6}', 5) `);
+@primary-color-6: @primary-color;
+@primary-color-7: color(~`colorPalette('@{primary-color-6}', 7) `);
+@primary-color-8: color(~`colorPalette('@{primary-color-6}', 8) `);
+@primary-color-9: color(~`colorPalette('@{primary-color-6}', 9) `);
+@primary-color-10: color(~`colorPalette('@{primary-color-6}', 10) `);
+
+@white: #ffffff;
+@white-darken: darken(@white, 5%);
+
+@text-color: fade(#000, 65%);
+@text-color-secondary: fade(#000, 45%);
+@text-color-inverse: @white;
+
+// border
+
+@border-color-base: hsv(0, 0, 85%);
+
+// animation
+
+@ease-in-out: cubic-bezier(0.645, 0.045, 0.355, 1);
+
+@animation-duration-slow: 0.3s;
+@animation-duration-base: 0.2s;
+@animation-duration-fast: 0.1s;
+
+// button
+
+@btn-normal-size: 88px;
+@btn-default-color: @text-color;
+@btn-primary-color: @text-color-inverse;
+
+@btn-disabled-color: @text-color-secondary;
+@btn-disabled-bg: darken(@white, 10%);
+
+// loading
+
+@loading-animation-direction: 1s;
+@loading-size-normal: 28px;
+@loading-size-small: 20px;
+@loading-size-large: 32px;

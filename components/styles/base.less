@@ -1,0 +1,13 @@
+@import 'theme';
+
+html {
+  font-size: (@vw-fontsize / @vw-design) * 100vw;
+}
+
+[class|='@{prefix-class}'] {
+  box-sizing: border-box;
+  ::before,
+  ::after {
+    box-sizing: border-box;
+  }
+}
