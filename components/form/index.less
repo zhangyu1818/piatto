@@ -1,0 +1,32 @@
+@import '../styles/base';
+@import '../styles/theme';
+@import '../styles/utils/rem';
+@import '../styles/utils/textOverflow';
+
+@form-prefix-class: ~'@{prefix-class}-form';
+@input-prefix-class: ~'@{prefix-class}-input';
+
+.@{form-prefix-class}-item {
+  // error
+  &.@{form-prefix-class}-item-error {
+    // input error
+    .@{input-prefix-class} {
+      border-color: @border-color-error;
+      &:focus-within {
+        box-shadow: 0 0 0 rem(@box-shadow-spread) fade(@border-color-error, 20%);
+      }
+    }
+  }
+
+  // error label
+  &-explain {
+    display: flex;
+    align-items: center;
+    height: rem(@form-item-explain-height);
+    margin: 0 rem(@margin-sm);
+    color: @form-item-explain-error-color;
+    font-size: rem(18px);
+    line-height: rem(@form-item-explain-height);
+    .textOverflow();
+  }
+}
