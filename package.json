@@ -27,7 +27,7 @@
     "typescript": "^3.9.3"
   },
   "scripts": {
-    "storybook": "start-storybook -p 8000",
+    "storybook": "start-storybook -p 8080",
     "lint-staged": "lint-staged"
   },
   "peerDependencies": {
