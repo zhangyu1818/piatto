@@ -17,7 +17,7 @@ type InputValueType = InputProps['value'];
 const Input = (props: InputProps) => {
   const { getPrefixCls } = useConfig();
   const {
-    value: propsValue,
+    value: propsValue = '',
     onChange: propsOnChange,
     className,
     block,
