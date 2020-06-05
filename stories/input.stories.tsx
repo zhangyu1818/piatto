@@ -2,6 +2,8 @@ import React from 'react';
 import { Input } from 'piatto';
 import { PropertySafetyOutlined, CheckCircleOutlined } from '@ant-design/icons';
 
+import Phone from './component/phone';
+
 import 'piatto/input/index.less';
 
 export default {
@@ -11,7 +13,7 @@ export default {
 
 export const Normal = () => {
   return (
-    <>
+    <Phone>
       <Input placeholder="base usage" />
       <Input
         defaultValue="default value"
@@ -20,6 +22,6 @@ export const Normal = () => {
       />
       <Input block prefix="hello" suffix="world" />
       <Input allowClear placeholder="allow clear" />
-    </>
+    </Phone>
   );
 };
