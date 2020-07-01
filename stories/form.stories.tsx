@@ -1,6 +1,6 @@
 import React from 'react';
 import { Form, FormItem, Input, Button } from 'piatto';
-import { UserOutlined, PhoneOutlined, CheckCircleOutlined } from 'piatto/icon';
+import { UserOutlined, PhoneOutlined, CheckCircleOutlined } from '@ant-design/icons';
 
 import Phone from './component/phone';
 
