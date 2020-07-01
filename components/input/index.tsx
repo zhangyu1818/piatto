@@ -35,7 +35,7 @@ const Input = (props: InputProps) => {
 
   // implement getDerivedStateFromProps
   // https://reactjs.org/docs/hooks-faq.html#how-do-i-implement-getderivedstatefromprops
-  if (propsValue !== undefined && propsValue !== '' && propsValue !== inputValue) {
+  if (propsValue !== undefined && propsValue !== inputValue) {
     setInputValue(propsValue);
   }
 
