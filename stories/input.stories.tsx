@@ -22,6 +22,10 @@ export const Normal = () => {
       />
       <Input block prefix="hello" suffix="world" />
       <Input allowClear placeholder="allow clear" />
+      <Input.GetCode
+        buttonText="Get Code"
+        onGetCode={() => new Promise((resolve) => setTimeout(resolve, 1500))}
+      />
     </Phone>
   );
 };

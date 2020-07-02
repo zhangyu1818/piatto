@@ -24,13 +24,14 @@ export const Normal = () => (
         <Input placeholder="username" addonBefore={<UserOutlined />} block />
       </FormItem>
       <FormItem
+        validateTrigger={['onChange', 'onBlur']}
         name="phone"
         rules={[
           { required: true, message: 'place input your phone' },
           { pattern: /^1\d{10}$/, message: 'invalid number' },
         ]}
       >
-        <Input placeholder="phone" addonBefore={<PhoneOutlined />} block />
+        <Input placeholder="phone(11)" addonBefore={<PhoneOutlined />} block />
       </FormItem>
       <FormItem
         name="code"
@@ -40,24 +41,23 @@ export const Normal = () => (
         {(control, _, context) => {
           const phone = context.getFieldValue('phone');
           const [error] = context.getFieldError('phone');
+          console.log(error);
           const isValid = phone && !error;
           return (
-            <Input
-              placeholder="code"
+            <Input.GetCode
               {...control}
+              placeholder="code"
               addonBefore={<CheckCircleOutlined />}
-              addonAfter={
-                <button tabIndex={-1} disabled={!isValid} type="button">
-                  get code
-                </button>
-              }
               block
+              buttonText="Get Code"
+              buttonDisable={!isValid}
+              onGetCode={() => new Promise((resolve) => setTimeout(resolve, 1500))}
             />
           );
         }}
       </FormItem>
       <Button htmlType="submit">Submit</Button>
-      <p style={{ fontSize: '0.25rem', margin: 0 }}>
+      <p style={{ fontSize: '0.33rem', margin: 0 }}>
         if phone number is invalid, get code button will disabled
       </p>
     </Form>
