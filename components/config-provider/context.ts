@@ -1,6 +1,6 @@
 import React from 'react';
 
-interface ConfigContextProps {
+export interface ConfigContextProps {
   getPrefixCls(suffixCls: string, customClass?: string): string;
 }
 
