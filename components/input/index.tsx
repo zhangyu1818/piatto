@@ -1,9 +1,9 @@
-import React, { InputHTMLAttributes, useRef, useState } from 'react';
+import React, { InputHTMLAttributes, useCallback, useRef, useState } from 'react';
 import classNames from 'classnames';
 import { CloseCircleFilled } from '@ant-design/icons';
 import useConfig from '../hooks/useConfig';
 
-interface InputProps extends Omit<InputHTMLAttributes<HTMLInputElement>, 'prefix'> {
+export interface InputProps extends Omit<InputHTMLAttributes<HTMLInputElement>, 'prefix'> {
   block?: boolean;
   addonBefore?: React.ReactNode;
   addonAfter?: React.ReactNode;
@@ -17,7 +17,7 @@ type InputValueType = InputProps['value'];
 const Input = (props: InputProps) => {
   const { getPrefixCls } = useConfig();
   const {
-    value: propsValue = '',
+    value: propsValue,
     onChange: propsOnChange,
     className,
     block,
@@ -28,9 +28,12 @@ const Input = (props: InputProps) => {
     defaultValue,
     type = 'text',
     allowClear,
+    onFocus: propsOnFocus,
+    onBlur: propsOnBlur,
     ...restProps
   } = props;
   const [inputValue, setInputValue] = useState<InputValueType>(defaultValue ?? '');
+  const [focused, setFocused] = useState(false);
   const inputRef = useRef<HTMLInputElement>(null);
 
   // implement getDerivedStateFromProps
@@ -68,6 +71,7 @@ const Input = (props: InputProps) => {
   const prefixCls = getPrefixCls('input');
   const classes = classNames(prefixCls, className, {
     [`${prefixCls}-block`]: block,
+    [`${prefixCls}-focus`]: focused,
   });
 
   /* -------------------- prefix -------------------- */
@@ -97,10 +101,32 @@ const Input = (props: InputProps) => {
     </span>
   ) : null;
 
+  /* -------------------- focus --------------------- */
+
+  const focus = useCallback(() => {
+    if (inputRef.current) inputRef.current.focus();
+  }, []);
+
+  const onFocus: React.FocusEventHandler<HTMLInputElement> = useCallback(
+    (e) => {
+      setFocused(true);
+      if (propsOnFocus) propsOnFocus(e);
+    },
+    [propsOnFocus],
+  );
+
+  const onBlur: React.FocusEventHandler<HTMLInputElement> = useCallback(
+    (e) => {
+      setFocused(false);
+      if (propsOnBlur) propsOnBlur(e);
+    },
+    [propsOnBlur],
+  );
+
   /* -------------------- render -------------------- */
 
   return (
-    <span className={classes}>
+    <span className={classes} onClick={focus}>
       {addonBeforeNode}
       {prefixNode}
       <input
@@ -110,6 +136,8 @@ const Input = (props: InputProps) => {
         type={type}
         // IOS type number
         pattern={type === 'number' ? '[0-9]*' : undefined}
+        onFocus={onFocus}
+        onBlur={onBlur}
         {...restProps}
       />
       {closeIcon}

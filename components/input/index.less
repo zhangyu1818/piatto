@@ -24,8 +24,8 @@
   border: @border-width-base solid @border-color-base;
   border-radius: @border-radius-base;
   transition: all @ease-in-out @animation-duration-slow;
-  // use focus-within to simulate the focus effect
-  &:focus-within {
+
+  &-focus {
     border-color: @primary-color-5;
     box-shadow: 0 0 0 rem(@box-shadow-spread) fade(@primary-color-5, 20%);
   }
