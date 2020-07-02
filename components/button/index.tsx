@@ -14,15 +14,30 @@ export interface ButtonProps extends Omit<ButtonHTMLAttributes<HTMLButtonElement
 
 const Button: React.FC<ButtonProps> = (props) => {
   const { getPrefixCls } = useConfig();
-  const { children, loading, className, block, type = 'default', htmlType, ...restProps } = props;
+  const {
+    children,
+    loading,
+    className,
+    block,
+    type = 'default',
+    htmlType = 'button',
+    onClick,
+    ...restProps
+  } = props;
   const prefixCls = getPrefixCls('button');
   const classes = classNames(prefixCls, className, {
     [`${prefixCls}-${type}`]: type,
     [`${prefixCls}-loading`]: loading,
     [`${prefixCls}-block`]: block,
   });
+
+  const handleClick: React.MouseEventHandler<HTMLButtonElement> = (e) => {
+    if (loading) return;
+    if (onClick) onClick(e);
+  };
+
   return (
-    <button className={classes} type={htmlType} {...restProps}>
+    <button className={classes} type={htmlType} onClick={handleClick} {...restProps}>
       {loading && <LoadingOutlined className={`${prefixCls}-icon`} />}
       <span>{children}</span>
     </button>
