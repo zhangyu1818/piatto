@@ -5,7 +5,7 @@ import Input, { InputProps } from '../input';
 import useConfig from '../hooks/useConfig';
 import { sleep } from '../utils/sleep';
 
-interface GetCodeInputProps extends Omit<InputProps, 'addonAfter'> {
+export interface GetCodeInputProps extends Omit<InputProps, 'addonAfter'> {
   buttonText?: string;
   time?: number;
   buttonDisabled?: boolean;
