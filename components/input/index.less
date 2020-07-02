@@ -3,6 +3,7 @@
 @import '../styles/utils/rem';
 
 @input-prefix-class: ~'@{prefix-class}-input';
+@get-code-input-prefix-class: ~'@{prefix-class}-get-code-input';
 
 .input-divider() {
   display: inline-block;
@@ -82,6 +83,17 @@
     color: @input-clear-icon-color;
     &-hidden {
       visibility: hidden;
+    }
+  }
+
+  &.@{get-code-input-prefix-class} {
+    .@{input-prefix-class}-addon-after {
+      .@{get-code-input-prefix-class}-button {
+        min-width: rem(140px);
+        height: rem(@input-normal-size * 3/5);
+        padding: 0;
+        font-size: rem(@font-size-sm);
+      }
     }
   }
 }

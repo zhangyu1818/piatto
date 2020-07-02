@@ -1,6 +1,7 @@
 import React, { InputHTMLAttributes, useCallback, useRef, useState } from 'react';
 import classNames from 'classnames';
 import { CloseCircleFilled } from '@ant-design/icons';
+import GetCodeInput from './get-code';
 import useConfig from '../hooks/useConfig';
 
 export interface InputProps extends Omit<InputHTMLAttributes<HTMLInputElement>, 'prefix'> {
@@ -146,5 +147,7 @@ const Input = (props: InputProps) => {
     </span>
   );
 };
+
+Input.GetCode = GetCodeInput;
 
 export default Input;
