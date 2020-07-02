@@ -8,7 +8,7 @@ import { sleep } from '../utils/sleep';
 interface GetCodeInputProps extends Omit<InputProps, 'addonAfter'> {
   buttonText?: string;
   time?: number;
-  buttonDisable?: boolean;
+  buttonDisabled?: boolean;
   onGetCode?: (e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => void | Promise<void>;
 }
 
@@ -16,7 +16,7 @@ const GetCodeInput = (props: GetCodeInputProps) => {
   const {
     buttonText = '获取验证码',
     time = 60,
-    buttonDisable,
+    buttonDisabled,
     onGetCode,
     className,
     ...inputProps
@@ -84,7 +84,7 @@ const GetCodeInput = (props: GetCodeInputProps) => {
         <Button
           className={buttonCls}
           onClick={onClickButton}
-          disabled={buttonDisable}
+          disabled={buttonDisabled}
           loading={loading}
           tabIndex={-1}
           htmlType="button"

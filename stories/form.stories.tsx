@@ -50,7 +50,7 @@ export const Normal = () => (
               addonBefore={<CheckCircleOutlined />}
               block
               buttonText="Get Code"
-              buttonDisable={!isValid}
+              buttonDisabled={!isValid}
               onGetCode={() => new Promise((resolve) => setTimeout(resolve, 1500))}
             />
           );
