@@ -2,7 +2,7 @@
   "compilerOptions": {
     "baseUrl": "./",
     "paths": {
-      "piatto": ["components/index.tsx"]
+      "piatto": ["components"]
     },
     "strictNullChecks": true,
     "moduleResolution": "node",
