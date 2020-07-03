@@ -24,7 +24,7 @@ module.exports = {
       test: /\.(ts|tsx)$/,
       use: [{ loader: require.resolve('ts-loader') }],
     });
-    config.resolve.alias.piatto = path.resolve(__dirname, '../components');
+    config.resolve.alias.piatto = path.resolve(__dirname, '../src');
     config.resolve.extensions.push('.ts', '.tsx');
     return config;
   },
