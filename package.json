@@ -1,6 +1,9 @@
 {
   "name": "piatto",
   "version": "0.0.0",
+  "sideEffects": [
+    "*.less"
+  ],
   "main": "index.js",
   "license": "MIT",
   "dependencies": {
@@ -35,6 +38,7 @@
   },
   "scripts": {
     "storybook": "start-storybook -p 8080",
+    "build": "father build",
     "lint-staged": "lint-staged",
     "test": "father test --no-cache",
     "test:update": "father test --no-cache --update-snapshot",
