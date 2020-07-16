@@ -4,8 +4,16 @@
   "sideEffects": [
     "*.less"
   ],
-  "main": "index.js",
+  "main": "es/index.js",
   "license": "MIT",
+  "author": {
+    "name": "zhangyu1818",
+    "email": "723156735@qq.com",
+    "url": "https://zhangyu1818.com"
+  },
+  "repository": {
+    "url": "https://github.com/zhangyu1818/piatto.git"
+  },
   "dependencies": {
     "@ant-design/icons": "^4.1.0",
     "classnames": "^2.2.6",
