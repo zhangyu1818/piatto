@@ -1,0 +1,29 @@
+@import '../styles/utils/rem';
+
+@import '../styles/theme';
+
+@slider-prefix-class: ~'@{prefix-class}-slider';
+@handleOffset: rem(@slider-handle-size / 2 + @slider-size / 2);
+
+.@{slider-prefix-class} {
+  position: relative;
+  height: rem(@slider-size);
+  background: linear-gradient(
+      to left,
+      @slider-track-color 50%,
+      @slider-rail-color 0,
+      @slider-rail-color 100%
+    )
+    left/200%;
+  border-radius: rem(@border-radius-base);
+  .@{slider-prefix-class}-handle {
+    position: absolute;
+    top: ~'calc(50% - @{handleOffset})';
+    left: rem(-@slider-handle-size / 2);
+    width: rem(@slider-handle-size);
+    height: rem(@slider-handle-size);
+    background: @slider-handle-color;
+    border: rem(@slider-handle-size / (@slider-handle-size / 2)) solid @slider-track-color;
+    border-radius: 50%;
+  }
+}
