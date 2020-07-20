@@ -17,6 +17,7 @@
   "dependencies": {
     "@ant-design/icons": "^4.1.0",
     "classnames": "^2.2.6",
+    "lodash": "^4.17.19",
     "rc-field-form": "^1.4.0"
   },
   "devDependencies": {
@@ -29,6 +30,7 @@
     "@types/classnames": "^2.2.10",
     "@types/enzyme": "^3.10.5",
     "@types/jest": "^26.0.3",
+    "@types/lodash": "^4.14.157",
     "@types/react-dom": "^16.9.8",
     "@umijs/fabric": "^2.0.8",
     "babel-loader": "^8.1.0",
