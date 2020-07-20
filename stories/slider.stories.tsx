@@ -11,10 +11,10 @@ export default {
 };
 
 export const Normal = () => {
-  const [value, setValue] = React.useState(0);
+  const [value, setValue] = React.useState(100);
   return (
     <Phone style={{ padding: 40 }}>
-      <Slider min={0} max={100} step={1} value={value} onChange={(value) => setValue(value)} />
+      <Slider min={0} max={100} step={1} value={value} onChange={setValue} />
     </Phone>
   );
 };

@@ -3,6 +3,7 @@
 @import '../styles/theme';
 
 @slider-prefix-class: ~'@{prefix-class}-slider';
+
 @handleOffset: rem(@slider-handle-size / 2 + @slider-size / 2);
 
 .@{slider-prefix-class} {
@@ -16,7 +17,7 @@
     )
     left/200%;
   border-radius: rem(@border-radius-base);
-  .@{slider-prefix-class}-handle {
+  &-handle {
     position: absolute;
     top: ~'calc(50% - @{handleOffset})';
     left: rem(-@slider-handle-size / 2);
@@ -25,5 +26,9 @@
     background: @slider-handle-color;
     border: rem(@slider-handle-size / (@slider-handle-size / 2)) solid @slider-track-color;
     border-radius: 50%;
+    transition: box-shadow @animation-duration-slow @ease-in-out;
+    &-focus {
+      box-shadow: 0 0 0 rem(@box-shadow-spread) @box-shadow-color;
+    }
   }
 }
