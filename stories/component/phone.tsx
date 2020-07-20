@@ -7,7 +7,7 @@ const style: React.CSSProperties = {
 
 const Phone: React.FC = ({ children }) => {
   useLayoutEffect(() => {
-    document.documentElement.style.fontSize = `37.5px`;
+    document.documentElement.style.fontSize = `75px`;
   }, []);
   return <div style={style}>{children}</div>;
 };
