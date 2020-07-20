@@ -10,6 +10,7 @@ export interface ButtonProps extends Omit<ButtonHTMLAttributes<HTMLButtonElement
   type?: 'primary' | 'link';
   htmlType?: ButtonHTMLAttributes<HTMLButtonElement>['type'];
   block?: boolean;
+  shape?: 'round';
 }
 
 const Button: React.FC<ButtonProps> = (props) => {
@@ -22,6 +23,7 @@ const Button: React.FC<ButtonProps> = (props) => {
     type = 'default',
     htmlType = 'button',
     onClick,
+    shape,
     ...restProps
   } = props;
   const prefixCls = getPrefixCls('button');
@@ -29,6 +31,7 @@ const Button: React.FC<ButtonProps> = (props) => {
     [`${prefixCls}-${type}`]: type,
     [`${prefixCls}-loading`]: loading,
     [`${prefixCls}-block`]: block,
+    [`${prefixCls}-${shape}`]: shape,
   });
 
   const handleClick: React.MouseEventHandler<HTMLButtonElement> = (e) => {
