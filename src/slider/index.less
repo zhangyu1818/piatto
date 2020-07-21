@@ -4,8 +4,6 @@
 
 @slider-prefix-class: ~'@{prefix-class}-slider';
 
-@handleOffset: rem(@slider-handle-size / 2 + @slider-size / 2);
-
 .@{slider-prefix-class} {
   position: relative;
   height: rem(@slider-size);
@@ -19,7 +17,7 @@
   border-radius: rem(@border-radius-base);
   &-handle {
     position: absolute;
-    top: ~'calc(50% - @{handleOffset})';
+    top: 50%;
     left: rem(-@slider-handle-size / 2);
     width: rem(@slider-handle-size);
     height: rem(@slider-handle-size);

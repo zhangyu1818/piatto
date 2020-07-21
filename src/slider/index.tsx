@@ -52,9 +52,9 @@ class Slider extends PureComponent<SliderProps, SliderState> {
     this.maxDistance = width;
     this.stepDistance = width / (max - min) / step;
 
-    this.sliderRef.current.addEventListener('mousedown', this.onMouseDown);
-    window.addEventListener('mousemove', this.onMouseMove);
-    window.addEventListener('mouseup', this.onMouseUp);
+    this.sliderRef.current.addEventListener('touchstart', this.onTouchStart);
+    window.addEventListener('touchmove', this.onTouchMove);
+    window.addEventListener('touchend', this.onTouchEnd);
 
     // rerender component if slider value is controlled,because first render can't get the dom node
     const stateValue = value ?? defaultValue;
@@ -65,9 +65,9 @@ class Slider extends PureComponent<SliderProps, SliderState> {
   }
 
   componentWillUnmount() {
-    this.sliderRef.current?.removeEventListener('mousedown', this.onMouseDown);
-    window.removeEventListener('mousemove', this.onMouseMove);
-    window.removeEventListener('mouseup', this.onMouseUp);
+    this.sliderRef.current?.removeEventListener('touchstart', this.onTouchStart);
+    window.removeEventListener('touchmove', this.onTouchMove);
+    window.removeEventListener('touchend', this.onTouchEnd);
   }
 
   static getDerivedStateFromProps(props: SliderProps, state: SliderState) {
@@ -83,28 +83,36 @@ class Slider extends PureComponent<SliderProps, SliderState> {
     return clamp(percent * this.maxDistance, 0, this.maxDistance);
   };
 
-  onMouseDown = ({ pageX }: MouseEvent) => {
+  onTouchStart = ({ touches }: TouchEvent) => {
+    const { pageX } = touches[0];
     const { value } = this.state;
     this.prevValue = value;
     this.startPos = pageX;
     this.setState({ focus: true });
+    if (document.scrollingElement)
+      (document.scrollingElement as HTMLElement).style.overflow = 'hidden';
   };
 
-  onMouseMove = ({ pageX }: MouseEvent) => {
-    if (!this.state.focus) return;
+  onTouchMove = ({ touches }: TouchEvent) => {
+    const { focus } = this.state;
+    if (!focus) return;
+    const { pageX } = touches[0];
+    const { min, max } = this.props;
     const distance = pageX - this.startPos;
-    const value = Math.floor(distance / this.stepDistance) + this.prevValue;
+    const value = clamp(Math.floor(distance / this.stepDistance) + this.prevValue, min, max);
     this.setState({ value });
     // trigger onChange
     const { onChange } = this.props;
     if (onChange) onChange(value);
   };
 
-  onMouseUp = () => {
-    const { value } = this.state;
+  onTouchEnd = () => {
+    const { value, focus } = this.state;
+    if (!focus) return;
     this.setState({ focus: false });
     const { onAfterChange } = this.props;
     if (onAfterChange) onAfterChange(value);
+    if (document.scrollingElement) (document.scrollingElement as HTMLElement).style.overflow = '';
   };
 
   render() {
@@ -125,7 +133,7 @@ class Slider extends PureComponent<SliderProps, SliderState> {
         <div
           className={handleCls}
           ref={this.sliderHandleRef}
-          style={{ transform: `translateX(${offset}px)` }}
+          style={{ transform: `translate(${offset}px,-50%)` }}
         />
       </div>
     );
