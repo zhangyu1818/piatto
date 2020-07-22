@@ -44,10 +44,7 @@ const Input = (props: InputProps) => {
   }
 
   const onChange: React.ChangeEventHandler<HTMLInputElement> = (e) => {
-    if (propsOnChange) {
-      propsOnChange(e);
-      return;
-    }
+    if (propsOnChange) propsOnChange(e);
     setInputValue(e.target.value);
   };
 
