@@ -13,6 +13,7 @@ export interface SliderProps {
   onAfterChange?: (value: number) => void;
   className?: string;
   disabled?: boolean;
+  style?: React.CSSProperties;
 }
 
 interface SliderState {
@@ -143,7 +144,7 @@ class Slider extends PureComponent<SliderProps, SliderState> {
   };
 
   render() {
-    const { className, disabled } = this.props;
+    const { className, disabled, style } = this.props;
     const { value, focus } = this.state;
 
     const prefixCls = this.context.getPrefixCls('slider');
@@ -162,7 +163,11 @@ class Slider extends PureComponent<SliderProps, SliderState> {
     const offset = this.getOffset(value);
 
     return (
-      <div className={classes} style={{ backgroundPositionX: `${offset}px` }} ref={this.sliderRef}>
+      <div
+        className={classes}
+        style={{ ...style, backgroundPositionX: `${offset}px` }}
+        ref={this.sliderRef}
+      >
         <div
           className={handleCls}
           ref={this.sliderHandleRef}
