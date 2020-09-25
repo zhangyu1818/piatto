@@ -1,7 +1,7 @@
 import React, { useEffect, useRef, useState } from 'react';
 import classNames from 'classnames';
 import Button from '../button';
-import Input, { InputProps } from '../input';
+import Input, { InputProps } from ".";
 import useConfig from '../hooks/useConfig';
 import { sleep } from '../utils/sleep';
 

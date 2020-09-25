@@ -1,7 +1,7 @@
 import React from 'react';
 import { mount } from 'enzyme';
-import ConfigProvider, { ConfigContext } from '../../config-provider';
-import mountTest from '../../../tests/shared/mountTest';
+import ConfigProvider, { ConfigContext } from '../../src/config-provider';
+import mountTest from '../shared/mountTest';
 
 describe('ConfigProvider', () => {
   mountTest(ConfigProvider);

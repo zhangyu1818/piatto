@@ -1,8 +1,8 @@
 import React from 'react';
 import { mount } from 'enzyme';
-import Input from '../../input';
-import { Form, FormItem } from '../../form';
-import mountTest from '../../../tests/shared/mountTest';
+import Input from '../../src/input';
+import { Form, FormItem } from '../../src/form';
+import mountTest from '../shared/mountTest';
 
 describe('Input', () => {
   mountTest(Input);
@@ -54,5 +54,13 @@ describe('Input', () => {
     );
     wrapper.find('input').simulate('change', { target: { value: '123' } });
     expect(wrapper.find('input').prop('value')).toBe('123');
+  });
+
+  it('should call onChange', () => {
+    const onChangeMock = jest.fn();
+    const wrapper = mount(<Input onChange={onChangeMock} />);
+    wrapper.find('input').simulate('change', { target: { value: '1234' } });
+    expect(onChangeMock).toHaveBeenCalledTimes(1);
+    expect(wrapper.find('input').getDOMNode().getAttribute('value')).toBe('1234');
   });
 });

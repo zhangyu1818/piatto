@@ -1,7 +1,7 @@
 import React from 'react';
 import { mount } from 'enzyme';
-import Button from '../../button';
-import mountTest from '../../../tests/shared/mountTest';
+import Button from '../../src/button';
+import mountTest from '../shared/mountTest';
 
 describe('Button', () => {
   mountTest(Button);

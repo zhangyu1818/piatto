@@ -40,9 +40,7 @@ export const Normal = () => (
       >
         {(control, _, context) => {
           const phone = context.getFieldValue('phone');
-          const [error] = context.getFieldError('phone');
-          console.log(error);
-          const isValid = phone && !error;
+          const isValid = /^\d{11}$/.test(phone);
           return (
             <Input.GetCode
               {...control}
