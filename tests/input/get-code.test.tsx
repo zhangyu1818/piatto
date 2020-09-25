@@ -1,8 +1,8 @@
 import React from 'react';
 import { act } from 'react-dom/test-utils';
 import { mount } from 'enzyme';
-import Input from '../../input';
-import mountTest from '../../../tests/shared/mountTest';
+import Input from '../../src/input';
+import mountTest from '../shared/mountTest';
 
 const { GetCode: GetCodeInput } = Input;
 

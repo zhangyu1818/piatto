@@ -1,8 +1,8 @@
 import React from 'react';
 import { mount } from 'enzyme';
-import Input from '..';
-import { Form, FormItem } from '../../form';
-import mountTest from '../../../tests/shared/mountTest';
+import Input from '../../src/input';
+import { Form, FormItem } from '../../src/form';
+import mountTest from '../shared/mountTest';
 
 describe('Input', () => {
   mountTest(Input);
