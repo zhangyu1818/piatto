@@ -29,4 +29,21 @@
       box-shadow: 0 0 0 rem(@box-shadow-spread) @box-shadow-color;
     }
   }
+
+  // disabled
+  &.@{slider-prefix-class}-disabled {
+    background: linear-gradient(
+        to left,
+        @slider-track-disabled-color 50%,
+        @slider-rail-color 0,
+        @slider-rail-color 100%
+      )
+      left/200%;
+    pointer-events: none;
+
+    .@{slider-prefix-class}-handle {
+      border: rem(@slider-handle-size / (@slider-handle-size / 2)) solid
+        @slider-track-disabled-color;
+    }
+  }
 }
