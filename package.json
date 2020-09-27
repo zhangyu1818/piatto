@@ -17,8 +17,9 @@
   "dependencies": {
     "@ant-design/icons": "^4.1.0",
     "classnames": "^2.2.6",
+    "hook-form-async-validator": "^0.0.3",
     "lodash": "^4.17.19",
-    "rc-field-form": "^1.8.0"
+    "react-hook-form": "^6.8.6"
   },
   "devDependencies": {
     "@babel/core": "^7.9.6",
@@ -41,7 +42,9 @@
     "less-loader": "^6.1.0",
     "less-plugin-functions": "^1.0.0",
     "lint-staged": "^10.2.4",
+    "mutationobserver-shim": "^0.3.7",
     "prettier": "^2.0.5",
+    "regenerator-runtime": "^0.13.7",
     "stylelint": "^13.5.0",
     "ts-loader": "^7.0.4",
     "typescript": "^3.9.3"

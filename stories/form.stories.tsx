@@ -1,5 +1,5 @@
 import React from 'react';
-import { Form, FormItem, Input, Button } from 'piatto';
+import { Form, Input, Button } from 'piatto';
 import { UserOutlined, PhoneOutlined, CheckCircleOutlined } from '@ant-design/icons';
 
 import Phone from './component/phone';
@@ -11,20 +11,34 @@ export default {
   title: 'Form',
 };
 
+const DependenceInput: React.FC = (props) => {
+  const phone = Form.useWatch({ name: 'phone', defaultValue: '' });
+  const isValid = /^\d{11}$/.test(phone);
+  return (
+    <Input.GetCode
+      {...props}
+      placeholder="code"
+      addonBefore={<CheckCircleOutlined />}
+      block
+      buttonText="Get Code"
+      buttonDisabled={!isValid}
+      onGetCode={() => new Promise((resolve) => setTimeout(resolve, 1500))}
+    />
+  );
+};
+
 export const Normal = () => (
   <Phone>
     <Form
-      validateTrigger={['onBlur']}
       onFinish={(values) => {
         // eslint-disable-next-line no-console
         console.log(values);
       }}
     >
-      <FormItem name="username" rules={[{ required: true, message: 'place input your username' }]}>
+      <Form.Item name="username" rules={[{ required: true, message: 'place input your username' }]}>
         <Input placeholder="username" addonBefore={<UserOutlined />} block />
-      </FormItem>
-      <FormItem
-        validateTrigger={['onChange', 'onBlur']}
+      </Form.Item>
+      <Form.Item
         name="phone"
         rules={[
           { required: true, message: 'place input your phone' },
@@ -32,28 +46,10 @@ export const Normal = () => (
         ]}
       >
         <Input placeholder="phone(11)" addonBefore={<PhoneOutlined />} block />
-      </FormItem>
-      <FormItem
-        name="code"
-        rules={[{ required: true, message: 'place input your code' }]}
-        dependencies={['phone']}
-      >
-        {(control, _, context) => {
-          const phone = context.getFieldValue('phone');
-          const isValid = /^\d{11}$/.test(phone);
-          return (
-            <Input.GetCode
-              {...control}
-              placeholder="code"
-              addonBefore={<CheckCircleOutlined />}
-              block
-              buttonText="Get Code"
-              buttonDisabled={!isValid}
-              onGetCode={() => new Promise((resolve) => setTimeout(resolve, 1500))}
-            />
-          );
-        }}
-      </FormItem>
+      </Form.Item>
+      <Form.Item name="code" rules={[{ required: true, message: 'place input your code' }]}>
+        <DependenceInput />
+      </Form.Item>
       <Button htmlType="submit">Submit</Button>
       <p style={{ fontSize: '0.33rem', margin: 0 }}>
         if phone number is invalid, get code button will disabled
