@@ -1,25 +1,24 @@
 @import '../styles/theme';
-@import '../styles/utils/rem';
 
 @button-prefix-class: ~'@{prefix-class}-button';
 
 .@{button-prefix-class} {
   position: relative;
-  height: rem(@btn-normal-size);
-  padding: 0 rem(@padding-normal);
-  font-size: rem(@font-size-base);
-  border: @border-width-base solid transparent;
-  border-radius: rem(@border-radius-base);
+  height: @btn-normal-size;
+  padding: 0 @padding-normal;
+  font-size: @font-size-base;
+  border: @border-width-base solid transparent; /*px*/
+  border-radius: @border-radius-base;
   outline: none;
   transition: all @ease-in-out @animation-duration-fast;
   user-select: none;
 
   &::before {
     position: absolute;
-    top: -1px;
-    right: -1px;
-    bottom: -1px;
-    left: -1px;
+    top: -1px; /*px*/
+    right: -1px; /*px*/
+    bottom: -1px; /*px*/
+    left: -1px; /*px*/
     z-index: 1;
     display: none;
     background: @white;
@@ -30,7 +29,7 @@
   }
 
   &-icon {
-    margin-right: rem(@margin-xs);
+    margin-right: @margin-xs;
   }
 
   > span {
@@ -94,6 +93,6 @@
 
   // round
   &.@{button-prefix-class}-round {
-    border-radius: rem(@btn-normal-size / 2);
+    border-radius: @btn-normal-size / 2;
   }
 }

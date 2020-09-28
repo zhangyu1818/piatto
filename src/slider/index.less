@@ -1,12 +1,10 @@
-@import '../styles/utils/rem';
-
 @import '../styles/theme';
 
 @slider-prefix-class: ~'@{prefix-class}-slider';
 
 .@{slider-prefix-class} {
   position: relative;
-  height: rem(@slider-size);
+  height: @slider-size;
   background: linear-gradient(
       to left,
       @slider-track-color 50%,
@@ -14,19 +12,19 @@
       @slider-rail-color 100%
     )
     left/200%;
-  border-radius: rem(@border-radius-base);
+  border-radius: @border-radius-base;
   &-handle {
     position: absolute;
     top: 50%;
-    left: rem(-@slider-handle-size / 2);
-    width: rem(@slider-handle-size);
-    height: rem(@slider-handle-size);
+    left: -@slider-handle-size / 2;
+    width: @slider-handle-size;
+    height: @slider-handle-size;
     background: @slider-handle-color;
-    border: rem(@slider-handle-size / (@slider-handle-size / 2)) solid @slider-track-color;
+    border: @slider-handle-size / (@slider-handle-size / 2) solid @slider-track-color;
     border-radius: 50%;
     transition: box-shadow @animation-duration-slow @ease-in-out;
     &-focus {
-      box-shadow: 0 0 0 rem(@box-shadow-spread) @box-shadow-color;
+      box-shadow: 0 0 0 @box-shadow-spread @box-shadow-color;
     }
   }
 
@@ -42,7 +40,7 @@
     pointer-events: none;
 
     .@{slider-prefix-class}-handle {
-      border: rem(@slider-handle-size / (@slider-handle-size / 2)) solid
+      border: @slider-handle-size / (@slider-handle-size / 2) solid
         @slider-track-disabled-color;
     }
   }
