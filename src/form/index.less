@@ -1,5 +1,4 @@
 @import '../styles/theme';
-@import '../styles/utils/rem';
 @import '../styles/utils/textOverflow';
 
 @form-prefix-class: ~'@{prefix-class}-form';
@@ -12,7 +11,7 @@
     .@{input-prefix-class} {
       border-color: @border-color-error;
       &:focus-within {
-        box-shadow: 0 0 0 rem(@box-shadow-spread) fade(@border-color-error, 20%);
+        box-shadow: 0 0 0 @box-shadow-spread fade(@border-color-error, 20%);
       }
     }
   }
@@ -21,11 +20,11 @@
   &-explain {
     display: flex;
     align-items: center;
-    height: rem(@form-item-explain-height);
-    margin: 0 rem(@margin-sm);
+    height: @form-item-explain-height;
+    margin: 0 @margin-sm;
     color: @form-item-explain-error-color;
-    font-size: rem(@form-item-explain-font-size);
-    line-height: rem(@form-item-explain-height);
+    font-size: @form-item-explain-font-size;
+    line-height: @form-item-explain-height;
     .textOverflow();
   }
 }

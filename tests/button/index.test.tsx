@@ -1,5 +1,5 @@
 import React from 'react';
-import { mount } from 'enzyme';
+import { mount, render } from 'enzyme';
 import Button from '../../src/button';
 import mountTest from '../shared/mountTest';
 
@@ -11,7 +11,7 @@ describe('Button', () => {
   });
 
   it('should render empty button without errors', () => {
-    const wrapper = mount(
+    const wrapper = render(
       <Button>
         {null}
         {undefined}

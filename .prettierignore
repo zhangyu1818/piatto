@@ -1,3 +1,11 @@
+**/*.svg
+**/*.ejs
+**/*.html
+package.json
+.umi
+.umi-production
+.umi-test
+
 src/styles/utils/bezierEasing.less
 src/styles/utils/colorPalette.less
 src/styles/utils/tinyColor.less

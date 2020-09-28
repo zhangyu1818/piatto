@@ -1,7 +1,7 @@
 import React from 'react';
 import { mount } from 'enzyme';
 import Input from '../../src/input';
-import { Form, FormItem } from '../../src/form';
+import Form from '../../src/form';
 import mountTest from '../shared/mountTest';
 
 describe('Input', () => {
@@ -47,9 +47,9 @@ describe('Input', () => {
   it('should support value be controlled', () => {
     const wrapper = mount(
       <Form>
-        <FormItem name="user">
+        <Form.Item name="user">
           <Input />
-        </FormItem>
+        </Form.Item>
       </Form>,
     );
     wrapper.find('input').simulate('change', { target: { value: '123' } });

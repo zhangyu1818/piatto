@@ -2,7 +2,8 @@
   "compilerOptions": {
     "baseUrl": "./",
     "paths": {
-      "piatto": ["src"]
+      "@/*": ["src/*"],
+      "@@/*": ["src/.umi/*"]
     },
     "strictNullChecks": true,
     "moduleResolution": "node",
@@ -15,7 +16,8 @@
     "target": "es6",
     "lib": ["dom", "es2017"],
     "declaration": true,
-    "skipLibCheck": true
+    "skipLibCheck": true,
+    "allowSyntheticDefaultImports": true
   },
-  "exclude": ["node_modules"]
+  "exclude": ["node_modules", "lib", "es", "dist", "typings", "**/__test__", "test"]
 }
