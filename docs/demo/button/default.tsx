@@ -1,9 +1,9 @@
 import React from 'react';
-import { Button } from 'piatto';
+import { Space, Button } from 'piatto';
 
 export default () => {
   return (
-    <>
+    <Space>
       <Button>default</Button>
       <Button type="primary">primary</Button>
       <Button disabled>disabled</Button>
@@ -13,6 +13,6 @@ export default () => {
       </Button>
       <Button loading>default</Button>
       <Button type="link">link</Button>
-    </>
+    </Space>
   );
 };

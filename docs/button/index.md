@@ -1,4 +1,0 @@
-
-
-
-<code src="./default.tsx" />

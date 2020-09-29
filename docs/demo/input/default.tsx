@@ -1,10 +1,10 @@
 import React from 'react';
-import { Input } from 'piatto';
+import { Space, Input } from 'piatto';
 import { PropertySafetyOutlined, CheckCircleOutlined } from '@ant-design/icons';
 
 export default () => {
   return (
-    <div>
+    <Space>
       <Input placeholder="base usage" />
       <Input
         defaultValue="default value"
@@ -17,6 +17,6 @@ export default () => {
         buttonText="Get Code"
         onGetCode={() => new Promise(resolve => setTimeout(resolve, 1500))}
       />
-    </div>
+    </Space>
   );
 };
