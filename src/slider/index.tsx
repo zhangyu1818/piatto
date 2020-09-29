@@ -1,4 +1,5 @@
 import React, { PureComponent } from 'react';
+import ReactResizeObserver from 'rc-resize-observer';
 import classNames from 'classnames';
 import clamp from 'lodash/clamp';
 import { ConfigContext } from '../config-provider';
@@ -119,9 +120,10 @@ class Slider extends PureComponent<SliderProps, SliderState> {
       min,
       max,
     );
-    const isValueChange = oldValue !== value;
 
-    const shouldTriggerChange = value % step === 0 && isValueChange;
+    if (oldValue === value) return;
+
+    const shouldTriggerChange = value % step === 0;
 
     if (shouldTriggerChange) {
       const isNotControlled = !('value' in this.props);
@@ -163,17 +165,24 @@ class Slider extends PureComponent<SliderProps, SliderState> {
     const offset = this.getOffset(value);
 
     return (
-      <div
-        className={classes}
-        style={{ ...style, backgroundPositionX: `${offset}px` }}
-        ref={this.sliderRef}
+      <ReactResizeObserver
+        onResize={() => {
+          this.calcDistanceValue();
+          this.forceUpdate();
+        }}
       >
         <div
-          className={handleCls}
-          ref={this.sliderHandleRef}
-          style={{ transform: `translate(${offset}px,-50%)` }}
-        />
-      </div>
+          className={classes}
+          style={{ ...style, backgroundPositionX: `${offset}px` }}
+          ref={this.sliderRef}
+        >
+          <div
+            className={handleCls}
+            ref={this.sliderHandleRef}
+            style={{ transform: `translate(${offset}px,-50%)` }}
+          />
+        </div>
+      </ReactResizeObserver>
     );
   }
 }
