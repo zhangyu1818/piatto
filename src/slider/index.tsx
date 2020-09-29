@@ -52,7 +52,8 @@ class Slider extends PureComponent<SliderProps, SliderState> {
     const { value, defaultValue } = this.props;
     this.calcDistanceValue();
 
-    this.sliderRef.current!.addEventListener('touchstart', this.onTouchStart);
+    this.sliderRef.current!.addEventListener('touchstart', this.onMoveStart);
+    this.sliderRef.current!.addEventListener('mousedown', this.onMoveStart);
 
     // rerender component if slider value is controlled,because first render can't get the dom node
     const stateValue = value ?? defaultValue;
@@ -63,8 +64,10 @@ class Slider extends PureComponent<SliderProps, SliderState> {
   }
 
   componentWillUnmount() {
-    this.sliderRef.current?.removeEventListener('touchstart', this.onTouchStart);
-    this.removeWindowTouchEvent();
+    this.sliderRef.current?.removeEventListener('touchstart', this.onMoveStart);
+    this.sliderRef.current?.removeEventListener('mousedown', this.onMoveStart);
+
+    this.removeWindowEventHandler();
   }
 
   static getDerivedStateFromProps(props: SliderProps, state: SliderState) {
@@ -74,14 +77,20 @@ class Slider extends PureComponent<SliderProps, SliderState> {
     return null;
   }
 
-  addWindowTouchEvent = () => {
-    window.addEventListener('touchmove', this.onTouchMove);
-    window.addEventListener('touchend', this.onTouchEnd);
+  addWindowEventHandler = () => {
+    window.addEventListener('touchmove', this.onMove);
+    window.addEventListener('touchend', this.onMoveEnd);
+
+    window.addEventListener('mousemove', this.onMove);
+    window.addEventListener('mouseup', this.onMoveEnd);
   };
 
-  removeWindowTouchEvent = () => {
-    window.removeEventListener('touchmove', this.onTouchMove);
-    window.removeEventListener('touchend', this.onTouchEnd);
+  removeWindowEventHandler = () => {
+    window.removeEventListener('touchmove', this.onMove);
+    window.removeEventListener('touchend', this.onMoveEnd);
+
+    window.removeEventListener('mousemove', this.onMove);
+    window.removeEventListener('mouseup', this.onMoveEnd);
   };
 
   calcDistanceValue = () => {
@@ -98,21 +107,21 @@ class Slider extends PureComponent<SliderProps, SliderState> {
     return clamp(percent * this.maxDistance, 0, this.maxDistance);
   };
 
-  onTouchStart = ({ touches }: TouchEvent) => {
-    const { pageX } = touches[0];
+  onMoveStart = (event: TouchEvent | MouseEvent) => {
+    const { pageX } = (event as TouchEvent).touches?.[0] || (event as MouseEvent);
     const { value } = this.state;
     this.startValue = value;
     this.startPos = pageX;
     this.setState({ focus: true });
     if (document.scrollingElement)
       (document.scrollingElement as HTMLElement).style.overflow = 'hidden';
-    this.addWindowTouchEvent();
+    this.addWindowEventHandler();
   };
 
-  onTouchMove = ({ touches }: TouchEvent) => {
+  onMove = (event: TouchEvent | MouseEvent) => {
     const { focus, value: oldValue } = this.state;
     if (!focus) return;
-    const { pageX } = touches[0];
+    const { pageX } = (event as TouchEvent).touches?.[0] || (event as MouseEvent);
     const { min, max, step } = this.props;
     const distance = pageX - this.startPos;
     const value = clamp(
@@ -135,14 +144,14 @@ class Slider extends PureComponent<SliderProps, SliderState> {
     }
   };
 
-  onTouchEnd = () => {
+  onMoveEnd = () => {
     const { value, focus } = this.state;
     if (!focus) return;
     this.setState({ focus: false });
     const { onAfterChange } = this.props;
     if (onAfterChange) onAfterChange(value);
     if (document.scrollingElement) (document.scrollingElement as HTMLElement).style.overflow = '';
-    this.removeWindowTouchEvent();
+    this.removeWindowEventHandler();
   };
 
   render() {
