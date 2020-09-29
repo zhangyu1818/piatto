@@ -1,0 +1,26 @@
+@import '../styles/theme';
+
+@space-prefix-class: ~'@{prefix-class}-space';
+
+.@{space-prefix-class} {
+  display: flex;
+  flex-direction: column;
+  &-item {
+    flex: none;
+    &:not(:last-child) {
+      .@{space-prefix-class}-small & {
+        margin-bottom: @gap-sm;
+      }
+      .@{space-prefix-class}-normal & {
+        margin-bottom: @gap-normal;
+      }
+      .@{space-prefix-class}-large & {
+        margin-bottom: @gap-large;
+      }
+    }
+  }
+
+  &.@{space-prefix-class}-horizontal {
+    flex-direction: row;
+  }
+}
