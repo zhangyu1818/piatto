@@ -25,7 +25,7 @@ export default defineConfig({
   extraPostCSSPlugins: [
     require('postcss-plugin-px2rem')({
       rootValue: 46.875,
-      minPixelValue: 3,
+      minPixelValue: 2,
       exclude: /node_module/,
     }),
   ],
