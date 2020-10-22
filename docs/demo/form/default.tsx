@@ -25,19 +25,19 @@ export default () => (
       console.log(values);
     }}
   >
-    <Form.Item name="username" rules={[{ required: true, message: 'place input your username' }]}>
+    <Form.Item name="username" rules={[{ required: true, message: 'please input your username' }]}>
       <Input placeholder="username" addonBefore={<UserOutlined />} block />
     </Form.Item>
     <Form.Item
       name="phone"
       rules={[
-        { required: true, message: 'place input your phone' },
+        { required: true, message: 'please input your phone' },
         { pattern: /^1\d{10}$/, message: 'invalid number' },
       ]}
     >
       <Input placeholder="phone(11)" addonBefore={<PhoneOutlined />} block />
     </Form.Item>
-    <Form.Item name="code" rules={[{ required: true, message: 'place input your code' }]}>
+    <Form.Item name="code" rules={[{ required: true, message: 'please input your code' }]}>
       <DependenceInput />
     </Form.Item>
     <Button htmlType="submit">Submit</Button>
