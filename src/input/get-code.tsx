@@ -1,7 +1,7 @@
 import React, { useEffect, useRef, useState } from 'react';
 import classNames from 'classnames';
 import Button from '../button';
-import Input, { InputProps } from ".";
+import Input, { InputProps } from '.';
 import useConfig from '../hooks/useConfig';
 import { sleep } from '../utils/sleep';
 
@@ -12,7 +12,10 @@ export interface GetCodeInputProps extends Omit<InputProps, 'addonAfter'> {
   onGetCode?: (e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => void | Promise<void>;
 }
 
-const GetCodeInput = (props: GetCodeInputProps) => {
+const InternalGetCodeInput: React.ForwardRefRenderFunction<HTMLInputElement, GetCodeInputProps> = (
+  props,
+  ref,
+) => {
   const {
     buttonText = '获取验证码',
     time = 60,
@@ -44,7 +47,7 @@ const GetCodeInput = (props: GetCodeInputProps) => {
     const [timerId, wait] = sleep(1000);
     timer.current = timerId;
     wait.then(() => {
-      setCount((prev) => {
+      setCount(prev => {
         if (prev > 0) {
           countdown();
           return prev - 1;
@@ -55,7 +58,7 @@ const GetCodeInput = (props: GetCodeInputProps) => {
     });
   };
 
-  const onClickButton: React.MouseEventHandler<HTMLButtonElement> = (e) => {
+  const onClickButton: React.MouseEventHandler<HTMLButtonElement> = e => {
     e.stopPropagation();
     if (startCountDown) return;
     if (onGetCode) {
@@ -79,6 +82,7 @@ const GetCodeInput = (props: GetCodeInputProps) => {
   return (
     <Input
       {...inputProps}
+      ref={ref}
       className={inputClasses}
       addonAfter={
         <Button
@@ -96,5 +100,7 @@ const GetCodeInput = (props: GetCodeInputProps) => {
     />
   );
 };
+
+const GetCodeInput = React.forwardRef(InternalGetCodeInput);
 
 export default GetCodeInput;

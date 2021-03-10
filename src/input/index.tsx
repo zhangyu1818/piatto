@@ -3,6 +3,7 @@ import classNames from 'classnames';
 import { CloseCircleFilled } from '@ant-design/icons';
 import GetCodeInput from './get-code';
 import useConfig from '../hooks/useConfig';
+import composeRef from '../utils/compose-ref';
 
 export interface InputProps extends Omit<InputHTMLAttributes<HTMLInputElement>, 'prefix'> {
   block?: boolean;
@@ -13,9 +14,17 @@ export interface InputProps extends Omit<InputHTMLAttributes<HTMLInputElement>, 
   allowClear?: boolean;
 }
 
+interface CompoundedComponent
+  extends React.ForwardRefExoticComponent<InputProps & React.RefAttributes<HTMLInputElement>> {
+  GetCode: typeof GetCodeInput;
+}
+
 type InputValueType = InputProps['value'];
 
-const Input = (props: InputProps) => {
+const InternalInput: React.ForwardRefRenderFunction<HTMLInputElement, InputProps> = (
+  props,
+  forwardedRef,
+) => {
   const { getPrefixCls } = useConfig();
   const {
     value: propsValue,
@@ -43,14 +52,14 @@ const Input = (props: InputProps) => {
     setInputValue(propsValue);
   }
 
-  const onChange: React.ChangeEventHandler<HTMLInputElement> = (e) => {
+  const onChange: React.ChangeEventHandler<HTMLInputElement> = e => {
     if (propsOnChange) propsOnChange(e);
     setInputValue(e.target.value);
   };
 
   /* --------------- onClick clear icon --------------- */
 
-  const onRest: React.MouseEventHandler = (e) => {
+  const onRest: React.MouseEventHandler = e => {
     if (propsOnChange && inputRef.current) {
       const event = Object.create(e);
       event.target = inputRef.current;
@@ -106,7 +115,7 @@ const Input = (props: InputProps) => {
   }, []);
 
   const onFocus: React.FocusEventHandler<HTMLInputElement> = useCallback(
-    (e) => {
+    e => {
       setFocused(true);
       if (propsOnFocus) propsOnFocus(e);
     },
@@ -114,7 +123,7 @@ const Input = (props: InputProps) => {
   );
 
   const onBlur: React.FocusEventHandler<HTMLInputElement> = useCallback(
-    (e) => {
+    e => {
       setFocused(false);
       if (propsOnBlur) propsOnBlur(e);
     },
@@ -128,7 +137,7 @@ const Input = (props: InputProps) => {
       {addonBeforeNode}
       {prefixNode}
       <input
-        ref={inputRef}
+        ref={composeRef(inputRef, forwardedRef)}
         value={inputValue}
         onChange={onChange}
         type={type}
@@ -144,6 +153,8 @@ const Input = (props: InputProps) => {
     </span>
   );
 };
+
+const Input = React.forwardRef<HTMLInputElement, InputProps>(InternalInput) as CompoundedComponent;
 
 Input.GetCode = GetCodeInput;
 
