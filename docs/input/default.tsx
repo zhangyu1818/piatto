@@ -1,6 +1,6 @@
-import React from 'react';
-import { Input } from 'piatto';
-import { PropertySafetyOutlined, CheckCircleOutlined } from '@ant-design/icons';
+import React from 'react'
+import { Input } from 'piatto'
+import { PropertySafetyOutlined, CheckCircleOutlined } from '@ant-design/icons'
 
 export default () => {
   return (
@@ -18,5 +18,5 @@ export default () => {
         onGetCode={() => new Promise(resolve => setTimeout(resolve, 1500))}
       />
     </div>
-  );
-};
+  )
+}

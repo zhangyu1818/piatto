@@ -1,4 +1,4 @@
-import px2rem from 'postcss-plugin-px2rem';
+import px2rem from 'postcss-plugin-px2rem'
 
 const options = {
   esm: { type: 'babel', importLibToEs: true },
@@ -13,6 +13,6 @@ const options = {
       exclude: /node_module/,
     }),
   ],
-};
+}
 
-export default options;
+export default options

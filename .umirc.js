@@ -1,5 +1,5 @@
-import { defineConfig } from 'dumi';
-import path from 'path';
+import { defineConfig } from 'dumi'
+import path from 'path'
 
 export default defineConfig({
   title: 'piatto',
@@ -43,4 +43,4 @@ export default defineConfig({
     }
     `,
   ],
-});
+})

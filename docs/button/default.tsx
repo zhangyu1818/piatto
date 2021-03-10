@@ -1,5 +1,5 @@
-import React from 'react';
-import { Button } from 'piatto';
+import React from 'react'
+import { Button } from 'piatto'
 
 export default () => {
   return (
@@ -14,5 +14,5 @@ export default () => {
       <Button loading>default</Button>
       <Button type="link">link</Button>
     </>
-  );
-};
+  )
+}

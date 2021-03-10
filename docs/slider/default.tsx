@@ -1,8 +1,8 @@
-import React from 'react';
-import { Slider, Input } from 'piatto';
+import React from 'react'
+import { Slider, Input } from 'piatto'
 
 export default () => {
-  const [value, setValue] = React.useState(100);
+  const [value, setValue] = React.useState(100)
   return (
     <div style={{ padding: 10 }}>
       <Input value={value} onChange={({ currentTarget }) => setValue(+currentTarget.value)} />
@@ -13,5 +13,5 @@ export default () => {
       <div style={{ height: 20 }} />
       <Slider min={0} max={100} defaultValue={30} step={10} disabled />
     </div>
-  );
-};
+  )
+}

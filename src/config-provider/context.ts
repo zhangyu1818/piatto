@@ -1,14 +1,14 @@
-import React from 'react';
+import React from 'react'
 
 export interface ConfigContextProps {
-  getPrefixCls(suffixCls: string, customClass?: string): string;
+  getPrefixCls(suffixCls: string, customClass?: string): string
 }
 
 const ConfigContext = React.createContext<ConfigContextProps>({
   getPrefixCls(suffixCls, customClass) {
-    if (customClass) return customClass;
-    return `piatto-${suffixCls}`;
+    if (customClass) return customClass
+    return `piatto-${suffixCls}`
   },
-});
+})
 
-export default ConfigContext;
+export default ConfigContext

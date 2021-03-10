@@ -1,31 +1,31 @@
-import React, { InputHTMLAttributes, useCallback, useRef, useState } from 'react';
-import classNames from 'classnames';
-import { CloseCircleFilled } from '@ant-design/icons';
-import GetCodeInput from './get-code';
-import useConfig from '../hooks/useConfig';
-import composeRef from '../utils/compose-ref';
+import React, { InputHTMLAttributes, useCallback, useRef, useState } from 'react'
+import classNames from 'classnames'
+import { CloseCircleFilled } from '@ant-design/icons'
+import GetCodeInput from './get-code'
+import useConfig from '../hooks/useConfig'
+import composeRef from '../utils/compose-ref'
 
 export interface InputProps extends Omit<InputHTMLAttributes<HTMLInputElement>, 'prefix'> {
-  block?: boolean;
-  addonBefore?: React.ReactNode;
-  addonAfter?: React.ReactNode;
-  prefix?: React.ReactNode;
-  suffix?: React.ReactNode;
-  allowClear?: boolean;
+  block?: boolean
+  addonBefore?: React.ReactNode
+  addonAfter?: React.ReactNode
+  prefix?: React.ReactNode
+  suffix?: React.ReactNode
+  allowClear?: boolean
 }
 
 interface CompoundedComponent
   extends React.ForwardRefExoticComponent<InputProps & React.RefAttributes<HTMLInputElement>> {
-  GetCode: typeof GetCodeInput;
+  GetCode: typeof GetCodeInput
 }
 
-type InputValueType = InputProps['value'];
+type InputValueType = InputProps['value']
 
 const InternalInput: React.ForwardRefRenderFunction<HTMLInputElement, InputProps> = (
   props,
   forwardedRef,
 ) => {
-  const { getPrefixCls } = useConfig();
+  const { getPrefixCls } = useConfig()
   const {
     value: propsValue,
     onChange: propsOnChange,
@@ -41,59 +41,59 @@ const InternalInput: React.ForwardRefRenderFunction<HTMLInputElement, InputProps
     onFocus: propsOnFocus,
     onBlur: propsOnBlur,
     ...restProps
-  } = props;
-  const [inputValue, setInputValue] = useState<InputValueType>(defaultValue ?? '');
-  const [focused, setFocused] = useState(false);
-  const inputRef = useRef<HTMLInputElement>(null);
+  } = props
+  const [inputValue, setInputValue] = useState<InputValueType>(defaultValue ?? '')
+  const [focused, setFocused] = useState(false)
+  const inputRef = useRef<HTMLInputElement>(null)
 
   // implement getDerivedStateFromProps
   // https://reactjs.org/docs/hooks-faq.html#how-do-i-implement-getderivedstatefromprops
   if (propsValue !== undefined && propsValue !== inputValue) {
-    setInputValue(propsValue);
+    setInputValue(propsValue)
   }
 
   const onChange: React.ChangeEventHandler<HTMLInputElement> = e => {
-    if (propsOnChange) propsOnChange(e);
-    setInputValue(e.target.value);
-  };
+    if (propsOnChange) propsOnChange(e)
+    setInputValue(e.target.value)
+  }
 
   /* --------------- onClick clear icon --------------- */
 
   const onRest: React.MouseEventHandler = e => {
     if (propsOnChange && inputRef.current) {
-      const event = Object.create(e);
-      event.target = inputRef.current;
-      event.currentTarget = inputRef.current;
-      const originInputValue = inputRef.current.value;
-      inputRef.current.value = '';
-      propsOnChange(event);
-      inputRef.current.value = originInputValue;
+      const event = Object.create(e)
+      event.target = inputRef.current
+      event.currentTarget = inputRef.current
+      const originInputValue = inputRef.current.value
+      inputRef.current.value = ''
+      propsOnChange(event)
+      inputRef.current.value = originInputValue
     } else {
-      setInputValue('');
+      setInputValue('')
     }
     // eslint-disable-next-line no-unused-expressions
-    inputRef.current?.focus();
-  };
+    inputRef.current?.focus()
+  }
 
-  const prefixCls = getPrefixCls('input');
+  const prefixCls = getPrefixCls('input')
   const classes = classNames(prefixCls, className, {
     [`${prefixCls}-block`]: block,
     [`${prefixCls}-focus`]: focused,
-  });
+  })
 
   /* -------------------- prefix -------------------- */
 
-  const prefixNode = prefix ? <span className={`${prefixCls}-prefix`}>{prefix}</span> : null;
-  const suffixNode = suffix ? <span className={`${prefixCls}-suffix`}>{suffix}</span> : null;
+  const prefixNode = prefix ? <span className={`${prefixCls}-prefix`}>{prefix}</span> : null
+  const suffixNode = suffix ? <span className={`${prefixCls}-suffix`}>{suffix}</span> : null
 
   /* -------------------- addon -------------------- */
 
   const addonBeforeNode = addonBefore ? (
     <span className={`${prefixCls}-addon-before`}>{addonBefore}</span>
-  ) : null;
+  ) : null
   const addonAfterNode = addonAfter ? (
     <span className={`${prefixCls}-addon-after`}>{addonAfter}</span>
-  ) : null;
+  ) : null
 
   /* ----------------- clear icon ----------------- */
 
@@ -106,29 +106,29 @@ const InternalInput: React.ForwardRefRenderFunction<HTMLInputElement, InputProps
     >
       <CloseCircleFilled />
     </span>
-  ) : null;
+  ) : null
 
   /* -------------------- focus --------------------- */
 
   const focus = useCallback(() => {
-    if (inputRef.current) inputRef.current.focus();
-  }, []);
+    if (inputRef.current) inputRef.current.focus()
+  }, [])
 
   const onFocus: React.FocusEventHandler<HTMLInputElement> = useCallback(
     e => {
-      setFocused(true);
-      if (propsOnFocus) propsOnFocus(e);
+      setFocused(true)
+      if (propsOnFocus) propsOnFocus(e)
     },
     [propsOnFocus],
-  );
+  )
 
   const onBlur: React.FocusEventHandler<HTMLInputElement> = useCallback(
     e => {
-      setFocused(false);
-      if (propsOnBlur) propsOnBlur(e);
+      setFocused(false)
+      if (propsOnBlur) propsOnBlur(e)
     },
     [propsOnBlur],
-  );
+  )
 
   /* -------------------- render -------------------- */
 
@@ -151,11 +151,11 @@ const InternalInput: React.ForwardRefRenderFunction<HTMLInputElement, InputProps
       {suffixNode}
       {addonAfterNode}
     </span>
-  );
-};
+  )
+}
 
-const Input = React.forwardRef<HTMLInputElement, InputProps>(InternalInput) as CompoundedComponent;
+const Input = React.forwardRef<HTMLInputElement, InputProps>(InternalInput) as CompoundedComponent
 
-Input.GetCode = GetCodeInput;
+Input.GetCode = GetCodeInput
 
-export default Input;
+export default Input
