@@ -1,5 +1,6 @@
 import React, { InputHTMLAttributes, useCallback, useRef, useState } from 'react'
 import classNames from 'classnames'
+import useDerivedValue from 'use-derived-value'
 import { CloseCircleFilled } from '@ant-design/icons'
 import GetCodeInput from './get-code'
 import useConfig from '../hooks/useConfig'
@@ -27,7 +28,6 @@ const InternalInput: React.ForwardRefRenderFunction<HTMLInputElement, InputProps
 ) => {
   const { getPrefixCls } = useConfig()
   const {
-    value: propsValue,
     onChange: propsOnChange,
     className,
     block,
@@ -35,26 +35,25 @@ const InternalInput: React.ForwardRefRenderFunction<HTMLInputElement, InputProps
     suffix,
     addonBefore,
     addonAfter,
-    defaultValue,
+    defaultValue = '',
     type = 'text',
     allowClear,
     onFocus: propsOnFocus,
     onBlur: propsOnBlur,
     ...restProps
   } = props
-  const [inputValue, setInputValue] = useState<InputValueType>(defaultValue ?? '')
+  const [inputValue, setInputValue] = useDerivedValue<InputValueType>(defaultValue, () =>
+    'value' in props ? props.value : null,
+  )
   const [focused, setFocused] = useState(false)
   const inputRef = useRef<HTMLInputElement>(null)
 
-  // implement getDerivedStateFromProps
-  // https://reactjs.org/docs/hooks-faq.html#how-do-i-implement-getderivedstatefromprops
-  if (propsValue !== undefined && propsValue !== inputValue) {
-    setInputValue(propsValue)
-  }
-
   const onChange: React.ChangeEventHandler<HTMLInputElement> = e => {
-    if (propsOnChange) propsOnChange(e)
-    setInputValue(e.target.value)
+    if (propsOnChange) {
+      propsOnChange(e)
+    } else {
+      setInputValue(e.target.value)
+    }
   }
 
   /* --------------- onClick clear icon --------------- */

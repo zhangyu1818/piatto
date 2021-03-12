@@ -40,7 +40,8 @@
     "hook-form-async-validator": "^0.0.3",
     "lodash": "^4.17.20",
     "react": "^16.12.0",
-    "react-hook-form": "^6.8.6"
+    "react-hook-form": "^6.8.6",
+    "use-derived-value": "^1.0.0"
   },
   "devDependencies": {
     "@ant-design/icons": "^4.2.2",
