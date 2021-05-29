@@ -1,7 +1,7 @@
 import React from 'react'
 import { mount, render } from 'enzyme'
 import mountTest from '../shared/mountTest'
-import Slider from '../../src/slider'
+import Slider from '../../components/slider'
 
 describe('Input', () => {
   mountTest(Slider)

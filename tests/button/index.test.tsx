@@ -1,6 +1,6 @@
 import React from 'react'
 import { mount, render } from 'enzyme'
-import Button from '../../src/button'
+import Button from '../../components/button'
 import mountTest from '../shared/mountTest'
 
 describe('Button', () => {

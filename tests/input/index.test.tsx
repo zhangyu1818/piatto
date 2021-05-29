@@ -1,7 +1,7 @@
 import React from 'react'
 import { mount } from 'enzyme'
-import Input from '../../src/input'
-import Form from '../../src/form'
+import Input from '../../components/input'
+import Form from '../../components/form'
 import mountTest from '../shared/mountTest'
 
 describe('Input', () => {

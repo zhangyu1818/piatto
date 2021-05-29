@@ -6,6 +6,6 @@ package.json
 .umi-production
 .umi-test
 
-src/styles/utils/bezierEasing.less
-src/styles/utils/colorPalette.less
-src/styles/utils/tinyColor.less
+components/styles/utils/bezierEasing.less
+components/styles/utils/colorPalette.less
+components/styles/utils/tinyColor.less

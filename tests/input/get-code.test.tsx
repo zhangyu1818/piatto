@@ -1,7 +1,7 @@
 import React from 'react'
 import { act } from 'react-dom/test-utils'
 import { mount } from 'enzyme'
-import Input from '../../src/input'
+import Input from '../../components/input'
 import mountTest from '../shared/mountTest'
 
 const { GetCode: GetCodeInput } = Input
