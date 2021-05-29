@@ -1,6 +1,7 @@
 import React from 'react'
-import { mount } from 'enzyme'
-import ConfigProvider, { ConfigContext } from '../../components/config-provider'
+import { render } from '@testing-library/react'
+import { ConfigProvider } from 'piatto'
+import { ConfigContext } from '../../components/config-provider'
 import mountTest from '../shared/mountTest'
 
 describe('ConfigProvider', () => {
@@ -18,19 +19,21 @@ describe('ConfigProvider', () => {
   }
 
   it('should call default function', () => {
-    const wrapper = mount(<GetPrefixCls suffixCls="test" />)
-    expect(wrapper.text()).toBe('piatto-test')
-    wrapper.setProps({ customClass: 'custom-cls-test' })
-    expect(wrapper.text()).toBe('custom-cls-test')
+    const { rerender, getByText } = render(<GetPrefixCls suffixCls="test" />)
+    expect(getByText('piatto-test').textContent).toBe('piatto-test')
+    rerender(<GetPrefixCls suffixCls="test" customClass="custom-cls-test" />)
+    expect(getByText('custom-cls-test').textContent).toBe('custom-cls-test')
   })
 
   it('should call custom function', () => {
     const getPrefixCls = (suffixCls: string) => `${suffixCls}-custom-function-return`
-    const wrapper = mount(
+    const { getByText } = render(
       <ConfigProvider value={{ getPrefixCls }}>
         <GetPrefixCls suffixCls="piatto" />
       </ConfigProvider>
     )
-    expect(wrapper.text()).toBe('piatto-custom-function-return')
+    expect(getByText('piatto-custom-function-return').textContent).toBe(
+      'piatto-custom-function-return'
+    )
   })
 })

@@ -1,8 +1,8 @@
-import { useContext } from 'react'
+import * as React from 'react'
 import { ConfigContext } from '../config-provider'
 
 const useConfig = () => {
-  const context = useContext(ConfigContext)
+  const context = React.useContext(ConfigContext)
   return context
 }
 

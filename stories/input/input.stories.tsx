@@ -13,7 +13,7 @@ export default {
 
 export const Basic: Story<InputProps> = (args) => (
   <div>
-    <Input {...args} />
+    <Input {...args} allowClear defaultValue=""/>
     <Input {...args} addonBefore={<UserOutlined />} addonAfter={<CheckCircleOutlined />} />
     <Input {...args} prefix="Amount:" suffix="$" allowClear />
   </div>

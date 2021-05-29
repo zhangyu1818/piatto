@@ -1,4 +1,5 @@
 import { INITIAL_VIEWPORTS } from '@storybook/addon-viewport'
+import '@storybook/addon-console';
 
 import './styles/preview.less'
 
@@ -17,6 +18,7 @@ export const decorators = [
 ]
 
 export const parameters = {
+  actions: { argTypesRegex: '^on.*' },
   viewport: {
     viewports: INITIAL_VIEWPORTS,
     defaultViewport: 'iphone6',

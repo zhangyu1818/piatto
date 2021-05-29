@@ -1,66 +1,73 @@
 import React from 'react'
-import { mount } from 'enzyme'
-import Input from '../../components/input'
-import Form from '../../components/form'
+import { Input } from 'piatto'
+import { render, fireEvent, screen } from '@testing-library/react'
+import userEvent from '@testing-library/user-event'
 import mountTest from '../shared/mountTest'
+
+const getInputValueByLabelText = (label: string) => {
+  return (screen.getByLabelText(label) as HTMLInputElement).value
+}
 
 describe('Input', () => {
   mountTest(Input)
 
   it('should support input', () => {
-    const wrapper = mount(<Input />)
-    wrapper.find('input').simulate('change', { target: { value: '123' } })
-    expect(wrapper.find('input').getDOMNode().getAttribute('value')).toBe('123')
-    wrapper.find('input').simulate('change', { target: { value: '321' } })
-    expect(wrapper.find('input').getDOMNode().getAttribute('value')).toBe('321')
+    const { getByLabelText } = render(<Input aria-label="Input" />)
+    fireEvent.change(getByLabelText('Input'), { target: { value: 'test' } })
+    expect(getInputValueByLabelText('Input')).toBe('test')
+    fireEvent.change(getByLabelText('Input'), { target: { value: 'TEST' } })
+    expect(getInputValueByLabelText('Input')).toBe('TEST')
   })
 
   it('should support max length', () => {
-    const wrapper = mount(<Input maxLength={5} />)
-    expect(wrapper.find('input').getDOMNode()).toMatchSnapshot()
+    const { getByLabelText } = render(<Input aria-label="Input" maxLength={5} />)
+    expect(getByLabelText('Input')).toMatchSnapshot()
   })
 
   it('should support focus', () => {
-    const wrapper = mount(<Input />)
-    wrapper.find('input').simulate('focus')
-    expect(wrapper.find('.piatto-input-focus').length).toBe(1)
-    wrapper.find('input').simulate('blur')
-    expect(wrapper.find('.piatto-input-focus').length).toBe(0)
+    const { getByLabelText, baseElement } = render(<Input aria-label="Input" />)
+    fireEvent.focus(getByLabelText('Input'))
+    expect(baseElement.getElementsByClassName('piatto-input-focus').length).toBe(1)
+    fireEvent.blur(getByLabelText('Input'))
+    expect(baseElement.getElementsByClassName('piatto-input-focus').length).toBe(0)
   })
 
   it('should support default value', () => {
-    const wrapper = mount(<Input defaultValue="123" />)
-    expect(wrapper.find('input').getDOMNode().getAttribute('value')).toBe('123')
-  })
-
-  it('should not show clear icon if default value is empty', () => {
-    const wrapper = mount(<Input defaultValue="" />)
-    expect(wrapper.find('.piatto-input-clear-icon').length).toBe(0)
+    render(<Input aria-label="Input" defaultValue="123" />)
+    expect(getInputValueByLabelText('Input')).toBe('123')
   })
 
   it('should allow clear icon', () => {
-    const wrapper = mount(<Input defaultValue="321" allowClear />)
-    wrapper.find('.piatto-input-clear-icon').simulate('click')
-    expect(wrapper.find('input').getDOMNode().getAttribute('value')).toBe('')
+    const { baseElement } = render(<Input aria-label="Input" defaultValue="321" allowClear />)
+    userEvent.click(baseElement.getElementsByClassName('piatto-input-clear-icon')[0])
+    expect(getInputValueByLabelText('Input')).toBe('')
+  })
+
+  it('should not show clear icon if default value is empty', () => {
+    const { baseElement } = render(<Input allowClear defaultValue="" />)
+    expect(baseElement.getElementsByClassName('piatto-input-clear-icon-hidden').length).toBe(1)
   })
 
   it('should support value be controlled', () => {
-    const wrapper = mount(
-      <Form>
-        <Form.Item name="user">
-          <Input />
-        </Form.Item>
-      </Form>
-    )
-    wrapper.find('input').simulate('change', { target: { value: '123' } })
-    expect(wrapper.find('input').prop('value')).toBe('123')
+    let inputValue: string = ''
+    const Demo = () => {
+      const [value, setValue] = React.useState('')
+      inputValue = value
+      return (
+        <Input value={value} onChange={({ target }) => setValue(target.value)} aria-label="Input" />
+      )
+    }
+    const { getByLabelText } = render(<Demo />)
+    fireEvent.change(getByLabelText('Input'), { target: { value: 'test' } })
+    expect(getInputValueByLabelText('Input')).toBe('test')
+    expect(inputValue).toBe('test')
   })
 
   it('should call onChange', () => {
     const onChangeMock = jest.fn()
-    const wrapper = mount(<Input onChange={onChangeMock} />)
-    wrapper.find('input').simulate('change', { target: { value: '1234' } })
+    const { getByLabelText } = render(<Input aria-label="Input" onChange={onChangeMock} />)
+    fireEvent.change(getByLabelText('Input'), { target: { value: 'test' } })
     expect(onChangeMock).toHaveBeenCalledTimes(1)
-    expect(wrapper.find('input').getDOMNode().getAttribute('value')).toBe('1234')
+    expect(getInputValueByLabelText('Input')).toBe('test')
   })
 })

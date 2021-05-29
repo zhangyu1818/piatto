@@ -2,6 +2,7 @@
 
 exports[`Input should support max length 1`] = `
 <input
+  aria-label="Input"
   maxlength="5"
   type="text"
   value=""

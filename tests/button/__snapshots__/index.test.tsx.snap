@@ -1,61 +1,20 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`Button renders correctly 1`] = `
-<Button>
+<ForwardRef(InternalButton)>
   piatto
-</Button>
+</ForwardRef(InternalButton)>
 `;
 
 exports[`Button should render empty button without errors 1`] = `
-initialize {
-  "0": Node {
-    "attribs": Object {
-      "class": "piatto-button piatto-button-default",
-      "type": "button",
-    },
-    "children": Array [
-      Node {
-        "attribs": Object {},
-        "children": Array [],
-        "name": "span",
-        "namespace": "http://www.w3.org/1999/xhtml",
-        "next": null,
-        "parent": [Circular],
-        "prev": null,
-        "type": "tag",
-        "x-attribsNamespace": Object {},
-        "x-attribsPrefix": Object {},
-      },
-    ],
-    "name": "button",
-    "namespace": "http://www.w3.org/1999/xhtml",
-    "next": null,
-    "parent": Node {
-      "children": Array [
-        [Circular],
-      ],
-      "name": "root",
-      "next": null,
-      "parent": null,
-      "prev": null,
-      "type": "root",
-    },
-    "prev": null,
-    "type": "tag",
-    "x-attribsNamespace": Object {
-      "class": undefined,
-      "type": undefined,
-    },
-    "x-attribsPrefix": Object {
-      "class": undefined,
-      "type": undefined,
-    },
-  },
-  "_root": [Circular],
-  "length": 1,
-  "options": Object {
-    "decodeEntities": true,
-    "xml": false,
-  },
-}
+<body>
+  <div>
+    <button
+      class="piatto-button piatto-button-default"
+      type="button"
+    >
+      <span />
+    </button>
+  </div>
+</body>
 `;

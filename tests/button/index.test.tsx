@@ -1,6 +1,7 @@
 import React from 'react'
-import { mount, render } from 'enzyme'
-import Button from '../../components/button'
+import { Button } from 'piatto'
+import { render } from '@testing-library/react'
+import userEvent from '@testing-library/user-event'
 import mountTest from '../shared/mountTest'
 
 describe('Button', () => {
@@ -11,35 +12,35 @@ describe('Button', () => {
   })
 
   it('should render empty button without errors', () => {
-    const wrapper = render(
+    const { baseElement } = render(
       <Button>
         {null}
         {undefined}
       </Button>
     )
-    expect(wrapper).toMatchSnapshot()
+    expect(baseElement).toMatchSnapshot()
   })
 
   it('should be clickable', () => {
     const onClickMock = jest.fn()
-    const wrapper = mount(<Button onClick={onClickMock} />)
-    wrapper.simulate('click')
+    const { getByLabelText } = render(<Button aria-label="Button" onClick={onClickMock} />)
+    userEvent.click(getByLabelText('Button'))
     expect(onClickMock).toHaveBeenCalled()
   })
 
   it('should support to change loading', () => {
-    const wrapper = mount(<Button />)
-    expect(wrapper.find('.piatto-button-loading').length).toBe(0)
-    wrapper.setProps({ loading: true })
-    expect(wrapper.find('.piatto-button-loading').length).toBe(1)
-    wrapper.setProps({ loading: false })
-    expect(wrapper.find('.piatto-button-loading').length).toBe(0)
+    const { baseElement, rerender } = render(<Button />)
+    expect(baseElement.getElementsByClassName('piatto-button-loading').length).toBe(0)
+    rerender(<Button loading />)
+    expect(baseElement.getElementsByClassName('piatto-button-loading').length).toBe(1)
+    rerender(<Button />)
+    expect(baseElement.getElementsByClassName('piatto-button-loading').length).toBe(0)
   })
 
   it('should not clickable when button is loading', () => {
     const onClickMock = jest.fn()
-    const wrapper = mount(<Button loading onClick={onClickMock} />)
-    wrapper.simulate('click')
+    const { getByLabelText } = render(<Button aria-label="Button" loading onClick={onClickMock} />)
+    userEvent.click(getByLabelText('Button'))
     expect(onClickMock).not.toHaveBeenCalled()
   })
 })

@@ -163,11 +163,14 @@ class Slider extends PureComponent<SliderProps, SliderState> {
         className={classes}
         style={{ ...style, backgroundPositionX: `${offset}px` }}
         ref={this.sliderRef}
+        aria-label="Slider"
       >
         <div
           className={handleCls}
           ref={this.sliderHandleRef}
           style={{ transform: `translate(${offset}px,-50%)` }}
+          aria-label="Slider Handle"
+          role="button"
         />
       </div>
     )

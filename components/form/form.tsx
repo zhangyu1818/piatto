@@ -38,7 +38,7 @@ const InternalForm: React.ForwardRefRenderFunction<unknown, FormProps> = (
   ref
 ) => {
   devWarning(
-    propsForm && (propsRules || defaultValues),
+    !(propsForm && (propsRules || defaultValues)),
     `${propsRules ? 'rules' : ''} ${
       defaultValues ? 'defaultValues' : ''
     } is not valid when form is provided,please pass rules to your form instance`

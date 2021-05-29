@@ -4,6 +4,7 @@ import useDerivedValue from 'use-derived-value'
 import { CloseCircleFilled } from '@ant-design/icons'
 import GetCodeInput from './get-code'
 import useConfig from '../hooks/useConfig'
+import useImmutableValue from '../hooks/useImmutableValue'
 import composeRef from '../utils/compose-ref'
 
 export interface InputProps extends Omit<React.InputHTMLAttributes<HTMLInputElement>, 'prefix'> {
@@ -49,28 +50,23 @@ const InternalInput: React.ForwardRefRenderFunction<HTMLInputElement, InputProps
   const inputRef = React.useRef<HTMLInputElement>(null)
 
   const onChange: React.ChangeEventHandler<HTMLInputElement> = (e) => {
-    if (propsOnChange) {
-      propsOnChange(e)
-    } else {
-      setInputValue(e.target.value)
-    }
+    propsOnChange?.(e)
+    setInputValue(e.target.value)
   }
 
   /* --------------- onClick clear icon --------------- */
 
   const onRest: React.MouseEventHandler = (e) => {
-    if (propsOnChange && inputRef.current) {
+    if (inputRef.current) {
       const event = Object.create(e)
       event.target = inputRef.current
       event.currentTarget = inputRef.current
       const originInputValue = inputRef.current.value
       inputRef.current.value = ''
-      propsOnChange(event)
+      propsOnChange?.(event)
       inputRef.current.value = originInputValue
-    } else {
       setInputValue('')
     }
-    // eslint-disable-next-line no-unused-expressions
     inputRef.current?.focus()
   }
 
@@ -96,7 +92,7 @@ const InternalInput: React.ForwardRefRenderFunction<HTMLInputElement, InputProps
 
   /* ----------------- clear icon ----------------- */
 
-  const closeIcon = allowClear ? (
+  const clearIcon = allowClear ? (
     <span
       className={classNames(`${prefixCls}-clear-icon`, {
         [`${prefixCls}-clear-icon-hidden`]: !inputValue,
@@ -111,25 +107,19 @@ const InternalInput: React.ForwardRefRenderFunction<HTMLInputElement, InputProps
 
   /* -------------------- focus --------------------- */
 
-  const focus = React.useCallback(() => {
-    if (inputRef.current) inputRef.current.focus()
-  }, [])
+  const focus = useImmutableValue(() => {
+    inputRef.current?.focus()
+  })
 
-  const onFocus: React.FocusEventHandler<HTMLInputElement> = React.useCallback(
-    (e) => {
-      setFocused(true)
-      if (propsOnFocus) propsOnFocus(e)
-    },
-    [propsOnFocus]
-  )
+  const onFocus: React.FocusEventHandler<HTMLInputElement> = (e) => {
+    setFocused(true)
+    propsOnFocus?.(e)
+  }
 
-  const onBlur: React.FocusEventHandler<HTMLInputElement> = React.useCallback(
-    (e) => {
-      setFocused(false)
-      if (propsOnBlur) propsOnBlur(e)
-    },
-    [propsOnBlur]
-  )
+  const onBlur: React.FocusEventHandler<HTMLInputElement> = (e) => {
+    setFocused(false)
+    propsOnBlur?.(e)
+  }
 
   /* -------------------- render -------------------- */
 
@@ -149,7 +139,7 @@ const InternalInput: React.ForwardRefRenderFunction<HTMLInputElement, InputProps
         onBlur={onBlur}
         {...restProps}
       />
-      {closeIcon}
+      {clearIcon}
       {suffixNode}
       {addonAfterNode}
     </span>

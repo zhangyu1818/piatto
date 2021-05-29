@@ -93,9 +93,9 @@ const InternalGetCodeInput: React.ForwardRefRenderFunction<HTMLInputElement, Get
           onClick={onClickButton}
           disabled={buttonDisabled}
           loading={loading}
-          tabIndex={-1}
           htmlType="button"
           type="link"
+          aria-label="Get Code Button"
         >
           {loading ? null : startCountDown ? `${count}s` : buttonText}
         </Button>

@@ -1,64 +1,20 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`Input should match snapshots 1`] = `
-initialize {
-  "0": Node {
-    "attribs": Object {
-      "class": "piatto-slider",
-      "style": "background-position-x:0px",
-    },
-    "children": Array [
-      Node {
-        "attribs": Object {
-          "class": "piatto-slider-handle",
-          "style": "transform:translate(0px,-50%)",
-        },
-        "children": Array [],
-        "name": "div",
-        "namespace": "http://www.w3.org/1999/xhtml",
-        "next": null,
-        "parent": [Circular],
-        "prev": null,
-        "type": "tag",
-        "x-attribsNamespace": Object {
-          "class": undefined,
-          "style": undefined,
-        },
-        "x-attribsPrefix": Object {
-          "class": undefined,
-          "style": undefined,
-        },
-      },
-    ],
-    "name": "div",
-    "namespace": "http://www.w3.org/1999/xhtml",
-    "next": null,
-    "parent": Node {
-      "children": Array [
-        [Circular],
-      ],
-      "name": "root",
-      "next": null,
-      "parent": null,
-      "prev": null,
-      "type": "root",
-    },
-    "prev": null,
-    "type": "tag",
-    "x-attribsNamespace": Object {
-      "class": undefined,
-      "style": undefined,
-    },
-    "x-attribsPrefix": Object {
-      "class": undefined,
-      "style": undefined,
-    },
-  },
-  "_root": [Circular],
-  "length": 1,
-  "options": Object {
-    "decodeEntities": true,
-    "xml": false,
-  },
-}
+<body>
+  <div>
+    <div
+      aria-label="Slider"
+      class="piatto-slider"
+      style="background-position-x: 0px;"
+    >
+      <div
+        aria-label="Slider Handle"
+        class="piatto-slider-handle"
+        role="button"
+        style="transform: translate(0px,-50%);"
+      />
+    </div>
+  </div>
+</body>
 `;
