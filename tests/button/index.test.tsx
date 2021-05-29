@@ -15,7 +15,7 @@ describe('Button', () => {
       <Button>
         {null}
         {undefined}
-      </Button>,
+      </Button>
     )
     expect(wrapper).toMatchSnapshot()
   })

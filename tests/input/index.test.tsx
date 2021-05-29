@@ -10,19 +10,9 @@ describe('Input', () => {
   it('should support input', () => {
     const wrapper = mount(<Input />)
     wrapper.find('input').simulate('change', { target: { value: '123' } })
-    expect(
-      wrapper
-        .find('input')
-        .getDOMNode()
-        .getAttribute('value'),
-    ).toBe('123')
+    expect(wrapper.find('input').getDOMNode().getAttribute('value')).toBe('123')
     wrapper.find('input').simulate('change', { target: { value: '321' } })
-    expect(
-      wrapper
-        .find('input')
-        .getDOMNode()
-        .getAttribute('value'),
-    ).toBe('321')
+    expect(wrapper.find('input').getDOMNode().getAttribute('value')).toBe('321')
   })
 
   it('should support max length', () => {
@@ -40,12 +30,7 @@ describe('Input', () => {
 
   it('should support default value', () => {
     const wrapper = mount(<Input defaultValue="123" />)
-    expect(
-      wrapper
-        .find('input')
-        .getDOMNode()
-        .getAttribute('value'),
-    ).toBe('123')
+    expect(wrapper.find('input').getDOMNode().getAttribute('value')).toBe('123')
   })
 
   it('should not show clear icon if default value is empty', () => {
@@ -56,12 +41,7 @@ describe('Input', () => {
   it('should allow clear icon', () => {
     const wrapper = mount(<Input defaultValue="321" allowClear />)
     wrapper.find('.piatto-input-clear-icon').simulate('click')
-    expect(
-      wrapper
-        .find('input')
-        .getDOMNode()
-        .getAttribute('value'),
-    ).toBe('')
+    expect(wrapper.find('input').getDOMNode().getAttribute('value')).toBe('')
   })
 
   it('should support value be controlled', () => {
@@ -70,7 +50,7 @@ describe('Input', () => {
         <Form.Item name="user">
           <Input />
         </Form.Item>
-      </Form>,
+      </Form>
     )
     wrapper.find('input').simulate('change', { target: { value: '123' } })
     expect(wrapper.find('input').prop('value')).toBe('123')
@@ -81,11 +61,6 @@ describe('Input', () => {
     const wrapper = mount(<Input onChange={onChangeMock} />)
     wrapper.find('input').simulate('change', { target: { value: '1234' } })
     expect(onChangeMock).toHaveBeenCalledTimes(1)
-    expect(
-      wrapper
-        .find('input')
-        .getDOMNode()
-        .getAttribute('value'),
-    ).toBe('1234')
+    expect(wrapper.find('input').getDOMNode().getAttribute('value')).toBe('1234')
   })
 })

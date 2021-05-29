@@ -2,8 +2,6 @@ import * as React from 'react'
 import { useForm, FormProvider } from 'react-hook-form'
 import resolver from 'hook-form-async-validator'
 
-import devWarning from '../utils/dev-warning'
-
 import type {
   UseFormReturn,
   SubmitHandler,
@@ -13,6 +11,8 @@ import type {
   UnpackNestedValue,
 } from 'react-hook-form/dist/types'
 import type { Rules } from 'hook-form-async-validator'
+
+import devWarning from '../utils/dev-warning'
 
 export interface FormProps extends Omit<React.HTMLAttributes<HTMLFormElement>, 'onSubmit'> {
   form?: UseFormReturn
@@ -35,13 +35,13 @@ const InternalForm: React.ForwardRefRenderFunction<unknown, FormProps> = (
     defaultValues,
     ...restProps
   },
-  ref,
+  ref
 ) => {
   devWarning(
     propsForm && (propsRules || defaultValues),
     `${propsRules ? 'rules' : ''} ${
       defaultValues ? 'defaultValues' : ''
-    } is not valid when form is provided,please pass rules to your form instance`,
+    } is not valid when form is provided,please pass rules to your form instance`
   )
 
   const formRules = React.useMemo(() => {
@@ -75,7 +75,7 @@ const InternalForm: React.ForwardRefRenderFunction<unknown, FormProps> = (
 }
 
 const Form = React.forwardRef<UseFormReturn, FormProps>(InternalForm) as (
-  props: React.PropsWithChildren<FormProps> & { ref?: React.Ref<UseFormReturn> },
+  props: React.PropsWithChildren<FormProps> & { ref?: React.Ref<UseFormReturn> }
 ) => React.ReactElement
 
 export type { UseFormReturn }

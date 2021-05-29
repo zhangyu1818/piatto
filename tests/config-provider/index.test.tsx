@@ -29,7 +29,7 @@ describe('ConfigProvider', () => {
     const wrapper = mount(
       <ConfigProvider value={{ getPrefixCls }}>
         <GetPrefixCls suffixCls="piatto" />
-      </ConfigProvider>,
+      </ConfigProvider>
     )
     expect(wrapper.text()).toBe('piatto-custom-function-return')
   })

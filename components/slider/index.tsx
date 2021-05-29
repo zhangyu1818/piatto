@@ -149,7 +149,7 @@ class Slider extends PureComponent<SliderProps, SliderState> {
       {
         [`${prefixCls}-disabled`]: disabled,
       },
-      className,
+      className
     )
 
     const handleCls = classNames(`${prefixCls}-handle`, {

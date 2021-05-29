@@ -1,6 +1,6 @@
-const fabric = require('@umijs/fabric')
-
 module.exports = {
-  ...fabric.prettier,
+  singleQuote: true,
+  printWidth: 100,
+  proseWrap: 'never',
   semi: false,
 }

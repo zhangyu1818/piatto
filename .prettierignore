@@ -1,10 +1,16 @@
-**/*.svg
-**/*.ejs
-**/*.html
-package.json
-.umi
-.umi-production
-.umi-test
+.DS_Store
+.editorconfig
+.eslintignore
+.gitignore
+.prettierignore
+
+.husky
+.idea
+__snapshots__
+
+yarn.lock
+yarn-error.log
+
 
 components/styles/utils/bezierEasing.less
 components/styles/utils/colorPalette.less

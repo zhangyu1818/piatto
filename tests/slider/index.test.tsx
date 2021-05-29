@@ -6,7 +6,7 @@ import Slider from '../../components/slider'
 describe('Input', () => {
   mountTest(Slider)
 
-  it('should match snapshots', function() {
+  it('should match snapshots', function () {
     const wrapper = render(<Slider min={0} max={100} step={1} value={50} />)
     expect(wrapper).toMatchSnapshot()
   })
