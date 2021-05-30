@@ -26,6 +26,7 @@ export const parameters = {
   },
   layout: 'fullscreen',
   controls: {
+    sort: 'alpha',
     hideNoControlsWarning: true,
     matchers: {
       color: /(background|color)$/i,
