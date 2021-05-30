@@ -2,7 +2,7 @@ import { useForm, useFormContext, useWatch } from 'react-hook-form'
 import InternalForm from './form'
 import FormItem from './form-item'
 
-type InternalFormType = typeof InternalForm
+type InternalFormType = typeof InternalForm & { displayName?: string }
 
 interface FormComponent extends InternalFormType {
   Item: typeof FormItem
@@ -12,6 +12,7 @@ interface FormComponent extends InternalFormType {
 }
 
 const Form = InternalForm as FormComponent
+Form.displayName = 'Form'
 
 Form.Item = FormItem
 Form.useForm = useForm

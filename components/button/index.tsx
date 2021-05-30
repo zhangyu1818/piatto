@@ -54,5 +54,6 @@ const InternalButton: React.ForwardRefRenderFunction<unknown, ButtonProps> = (pr
 }
 
 const Button = React.forwardRef(InternalButton)
+Button.displayName = 'Button'
 
 export default Button

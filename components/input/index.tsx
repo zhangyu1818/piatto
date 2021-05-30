@@ -147,6 +147,7 @@ const InternalInput: React.ForwardRefRenderFunction<HTMLInputElement, InputProps
 }
 
 const Input = React.forwardRef<HTMLInputElement, InputProps>(InternalInput) as CompoundedComponent
+Input.displayName = 'Input'
 
 Input.GetCode = GetCodeInput
 
