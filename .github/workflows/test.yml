@@ -14,7 +14,7 @@ jobs:
         uses: actions/cache@v2
         with:
           path: node_modules
-          key: node_modules
+          key: node_modules-${{ hashFiles('**/package-lock.json') }}
 
       - name: install
         if: steps.node_modules_cache_id.outputs.cache-hit != 'true'
@@ -30,7 +30,7 @@ jobs:
         uses: actions/cache@v2
         with:
           path: node_modules
-          key: node_modules
+          key: node_modules-${{ hashFiles('**/package-lock.json') }}
 
       - name: cache lib
         uses: actions/cache@v2
@@ -58,7 +58,7 @@ jobs:
         uses: actions/cache@v2
         with:
           path: node_modules
-          key: node_modules
+          key: node_modules-${{ hashFiles('**/package-lock.json') }}
 
       - name: lint
         run: npm run lint
@@ -75,7 +75,7 @@ jobs:
         uses: actions/cache@v2
         with:
           path: node_modules
-          key: node_modules
+          key: node_modules-${{ hashFiles('**/package-lock.json') }}
 
       - name: test
         run: npm test -- -w 1 --coverage
@@ -95,7 +95,7 @@ jobs:
         uses: actions/cache@v2
         with:
           path: node_modules
-          key: node_modules
+          key: node_modules-${{ hashFiles('**/package-lock.json') }}
 
       - name: restore cache from lib
         uses: actions/cache@v2
@@ -120,7 +120,7 @@ jobs:
         uses: actions/cache@v2
         with:
           path: node_modules
-          key: node_modules
+          key: node_modules-${{ hashFiles('**/package-lock.json') }}
 
       - name: restore cache from es
         uses: actions/cache@v2
@@ -147,7 +147,7 @@ jobs:
         uses: actions/cache@v2
         with:
           path: node_modules
-          key: node_modules
+          key: node_modules-${{ hashFiles('**/package-lock.json') }}
 
       - name: install react 16
         run: npm run install-react-16
@@ -169,7 +169,7 @@ jobs:
         uses: actions/cache@v2
         with:
           path: node_modules
-          key: node_modules
+          key: node_modules-${{ hashFiles('**/package-lock.json') }}
 
       - name: restore cache from lib
         uses: actions/cache@v2
@@ -199,7 +199,7 @@ jobs:
         uses: actions/cache@v2
         with:
           path: node_modules
-          key: node_modules
+          key: node_modules-${{ hashFiles('**/package-lock.json') }}
 
       - name: restore cache from es
         uses: actions/cache@v2
