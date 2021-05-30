@@ -11,7 +11,7 @@ export interface GetCodeInputProps extends Omit<InputProps, 'addonAfter'> {
   buttonText?: string
   time?: number
   buttonDisabled?: boolean
-  onGetCode?: (e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => void | Promise<void>
+  onGetCode?: (e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => unknown | Promise<unknown>
 }
 
 const InternalGetCodeInput: React.ForwardRefRenderFunction<HTMLInputElement, GetCodeInputProps> = (
