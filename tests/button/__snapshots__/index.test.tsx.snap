@@ -1,9 +1,9 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`Button renders correctly 1`] = `
-<ForwardRef(InternalButton)>
+<Button>
   piatto
-</ForwardRef(InternalButton)>
+</Button>
 `;
 
 exports[`Button should render empty button without errors 1`] = `
