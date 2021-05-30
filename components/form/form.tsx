@@ -6,27 +6,31 @@ import type {
   UseFormReturn,
   SubmitHandler,
   SubmitErrorHandler,
-  FieldValues,
-  DeepPartial,
-  UnpackNestedValue,
+  DefaultValues,
 } from 'react-hook-form/dist/types'
 import type { Rules } from 'hook-form-async-validator'
 
 import devWarning from '../utils/dev-warning'
 
-export interface FormProps extends Omit<React.HTMLAttributes<HTMLFormElement>, 'onSubmit'> {
-  form?: UseFormReturn
-  onFinish?: SubmitHandler<FieldValues>
-  onError?: SubmitErrorHandler<FieldValues>
+export type FormValue = any
+export type FormValues = Record<string, FormValue>
+
+export interface FormProps<T extends FormValues = FormValues>
+  extends Omit<React.HTMLAttributes<HTMLFormElement>, 'onSubmit' | 'onError' | 'defaultValue'> {
+  form?: UseFormReturn<T>
+  onFinish?: SubmitHandler<T>
+  onError?: SubmitErrorHandler<T>
   rules?: Rules
-  defaultValues?: Partial<UnpackNestedValue<DeepPartial<FieldValues>>>
+  defaultValues?: DefaultValues<T>
   children: React.ReactElement | React.ReactElement[]
 }
 
 const noop = () => {}
-
-const InternalForm: React.ForwardRefRenderFunction<unknown, FormProps> = (
-  {
+function InternalForm<Values>(
+  props: FormProps<Values>,
+  ref: React.ForwardedRef<UseFormReturn<Values>>
+) {
+  const {
     children,
     form: propsForm,
     onFinish = noop,
@@ -34,14 +38,13 @@ const InternalForm: React.ForwardRefRenderFunction<unknown, FormProps> = (
     rules: propsRules,
     defaultValues,
     ...restProps
-  },
-  ref
-) => {
+  } = props
+
   devWarning(
     !(propsForm && (propsRules || defaultValues)),
     `${propsRules ? 'rules' : ''} ${
       defaultValues ? 'defaultValues' : ''
-    } is not valid when form is provided,please pass rules to your form instance`
+    } is not valid when form is provided,please pass rules and defaultValues to your form instance`
   )
 
   const formRules = React.useMemo(() => {
@@ -53,7 +56,7 @@ const InternalForm: React.ForwardRefRenderFunction<unknown, FormProps> = (
     return mergeRules
   }, [propsRules, children])
 
-  const form = useForm({
+  const form = useForm<Values>({
     mode: 'onTouched',
     resolver: resolver(formRules),
     defaultValues,
@@ -74,8 +77,8 @@ const InternalForm: React.ForwardRefRenderFunction<unknown, FormProps> = (
   )
 }
 
-const Form = React.forwardRef<UseFormReturn, FormProps>(InternalForm) as (
-  props: React.PropsWithChildren<FormProps> & { ref?: React.Ref<UseFormReturn> }
+const Form = React.forwardRef<UseFormReturn, FormProps>(InternalForm) as <T>(
+  props: FormProps<T> & { ref?: React.Ref<UseFormReturn<T>> }
 ) => React.ReactElement
 
 export type { UseFormReturn }

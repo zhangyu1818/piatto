@@ -1,0 +1,21 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Form should match snapshot 1`] = `
+<body>
+  <div>
+    <form>
+      <div
+        class="piatto-form-item"
+      >
+        <input
+          name="test"
+          value=""
+        />
+        <p
+          class="piatto-form-item-explain"
+        />
+      </div>
+    </form>
+  </div>
+</body>
+`;

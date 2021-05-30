@@ -6944,10 +6944,10 @@ hoist-non-react-statics@^3.3.0:
   dependencies:
     react-is "^16.7.0"
 
-hook-form-async-validator@^0.0.3:
-  version "0.0.3"
-  resolved "https://registry.yarnpkg.com/hook-form-async-validator/-/hook-form-async-validator-0.0.3.tgz#cfe50f3366b8e737c3240df41fa93eaa382d4b98"
-  integrity sha512-0bshU6Xh73p+dUQ7Z2ZQFD/rNbtHGzZGlvw73VQ9okztleqyceZE7mrQpY/juya1+bMTFro6w2Fz7uf4vu3GCA==
+hook-form-async-validator@^0.0.4:
+  version "0.0.4"
+  resolved "https://registry.yarnpkg.com/hook-form-async-validator/-/hook-form-async-validator-0.0.4.tgz#43c3b1b90659bb87eac353f726cfde73649e8165"
+  integrity sha512-ToFo3xFHAQ2XaxpCSE7C+t7xOjbCsMWEme7PmFGhATEVluBSfKEB3WAwVEypYpNpBx1Xzja1qYrCKJpICaDwlw==
   dependencies:
     async-validator "^3.4.0"
 
@@ -10644,10 +10644,10 @@ react-helmet-async@^1.0.7:
     react-fast-compare "^3.2.0"
     shallowequal "^1.1.0"
 
-react-hook-form@^7.6.10:
-  version "7.6.10"
-  resolved "https://registry.yarnpkg.com/react-hook-form/-/react-hook-form-7.6.10.tgz#77e98a08839e53a3222b935a07ef94be316f3521"
-  integrity sha512-V39bRK1iK4N9TbQf3jR2oUu7OcgnZAe/WUar1otRR8OHgnGM41XJ7UDQX176/nyCjIcmkcArQdsYc9dPYPpQ9Q==
+react-hook-form@^7.7.0:
+  version "7.7.0"
+  resolved "https://registry.yarnpkg.com/react-hook-form/-/react-hook-form-7.7.0.tgz#11072091fde39775ad834321d9f18f160d47e997"
+  integrity sha512-WhTl6lbQrV942yzmDL+Eq9AGwG0gARHBH198wuxYIoxtvrsBt5EskdTcRjAYXvJv9N5ojd3t+QoT4QXgDi5l0g==
 
 react-inspector@^5.1.0:
   version "5.1.1"

@@ -28,7 +28,7 @@ const FormItem: React.FC<FormItemProps> = ({ name, children, className, rules, .
   })
 
   return (
-    <div className={classes} {...restProps}>
+    <div className={classes}  {...restProps}>
       {React.cloneElement(children, { ...field, name })}
       <p className={`${prefixCls}-explain`}>{error ?? ''}</p>
     </div>

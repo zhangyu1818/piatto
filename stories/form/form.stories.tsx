@@ -35,7 +35,7 @@ export const Basic: Story<FormProps> = (args) => (
     }}
     {...args}
   >
-    <Form.Item name="username" rules={[{ required: true, message: 'this field is required' }]}>
+    <Form.Item name="username" rules={{ required: true, message: 'this field is required' }}>
       <Input placeholder="username" addonBefore={<UserOutlined />} block />
     </Form.Item>
     <Form.Item

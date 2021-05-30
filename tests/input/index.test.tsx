@@ -1,12 +1,9 @@
 import React from 'react'
 import { Input } from 'piatto'
-import { render, fireEvent, screen } from '@testing-library/react'
+import { render, fireEvent } from '@testing-library/react'
 import userEvent from '@testing-library/user-event'
 import mountTest from '../shared/mountTest'
-
-const getInputValueByLabelText = (label: string) => {
-  return (screen.getByLabelText(label) as HTMLInputElement).value
-}
+import { getInputValueByLabelText } from '../shared/queries'
 
 describe('Input', () => {
   mountTest(Input)
