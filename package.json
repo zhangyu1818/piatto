@@ -21,6 +21,7 @@
     "lint": "tsc --noEmit && npm run lint:script && npm run lint:style",
     "lint:script": "eslint . --ext '.js,.jsx,.ts,.tsx'",
     "lint:style": "stylelint '{site,components}/**/*.less' --syntax less",
+    "install-react-16": "npm i --no-save react@16 react-dom@16 react-test-renderer@16",
     "prepare": "husky install"
   },
   "dependencies": {
