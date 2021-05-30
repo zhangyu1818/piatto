@@ -1,6 +1,6 @@
 {
   "name": "piatto",
-  "version": "0.0.0-alpha.2",
+  "version": "0.1.0-alpha.0",
   "files": [
     "lib",
     "es"
@@ -30,7 +30,11 @@
     "lint:script": "eslint . --ext '.js,.jsx,.ts,.tsx'",
     "lint:style": "stylelint '{site,components}/**/*.less' --syntax less",
     "install-react-16": "npm i --no-save react@16 react-dom@16 react-test-renderer@16",
-    "prepare": "husky install"
+    "prepare": "husky install",
+    "prepublishOnly": "npm run build && HUSKY=0 np --tag=alpha --yolo --no-publish"
+  },
+  "np": {
+    "yarn": false
   },
   "dependencies": {
     "@ant-design/icons": "^4.6.2",
