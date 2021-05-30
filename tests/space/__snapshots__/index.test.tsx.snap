@@ -1,0 +1,33 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Space should match snapshot 1`] = `
+<body>
+  <div>
+    <div
+      class="piatto-space piatto-space-gap-normal piatto-space-horizontal"
+    >
+      <div
+        class="piatto-space-item"
+      >
+        <button>
+          1
+        </button>
+      </div>
+      <div
+        class="piatto-space-item"
+      >
+        <button>
+          2
+        </button>
+      </div>
+      <div
+        class="piatto-space-item"
+      >
+        <button>
+          3
+        </button>
+      </div>
+    </div>
+  </div>
+</body>
+`;

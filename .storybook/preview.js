@@ -1,5 +1,5 @@
 import { INITIAL_VIEWPORTS } from '@storybook/addon-viewport'
-import '@storybook/addon-console';
+import '@storybook/addon-console'
 
 import './styles/preview.less'
 
@@ -8,6 +8,7 @@ import 'piatto/button/index.less'
 import 'piatto/form/index.less'
 import 'piatto/input/index.less'
 import 'piatto/slider/index.less'
+import 'piatto/space/index.less'
 
 export const decorators = [
   (Story) => (
