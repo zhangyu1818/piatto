@@ -20,6 +20,34 @@ jobs:
         if: steps.node_modules_cache_id.outputs.cache-hit != 'true'
         run: npm ci
 
+  compile:
+    runs-on: ubuntu-latest
+    steps:
+      - name: checkout
+        uses: actions/checkout@master
+
+      - name: restore cache from node_modules
+        uses: actions/cache@v2
+        with:
+          path: node_modules
+          key: node_modules
+
+      - name: cache lib
+        uses: actions/cache@v2
+        with:
+          path: lib
+          key: lib-${{ github.sha }}
+
+      - name: cache es
+        uses: actions/cache@v2
+        with:
+          path: es
+          key: es-${{ github.sha }}
+
+      - name: build
+        run: npm run build
+    needs: setup
+
   lint:
     runs-on: ubuntu-latest
     steps:
@@ -56,6 +84,56 @@ jobs:
         uses: codecov/codecov-action@v1
     needs: setup
 
+  react-17-lib:
+    name: react@17.x / lib
+    runs-on: ubuntu-latest
+    steps:
+      - name: checkout
+        uses: actions/checkout@master
+
+      - name: restore cache from node_modules
+        uses: actions/cache@v2
+        with:
+          path: node_modules
+          key: node_modules
+
+      - name: restore cache from lib
+        uses: actions/cache@v2
+        with:
+          path: lib
+          key: lib-${{ github.sha }}
+
+      - name: test
+        run: npm test
+        env:
+          LIB_DIR: lib
+    needs: compile
+
+  react-17-es:
+    name: react@17.x / es
+    runs-on: ubuntu-latest
+    steps:
+      - name: checkout
+        uses: actions/checkout@master
+
+      - name: restore cache from node_modules
+        uses: actions/cache@v2
+        with:
+          path: node_modules
+          key: node_modules
+
+      - name: restore cache from es
+        uses: actions/cache@v2
+        with:
+          path: es
+          key: es-${{ github.sha }}
+
+      - name: test
+        run: npm test
+        env:
+          LIB_DIR: es
+    needs: compile
+
   react-16-dom:
     name: react@16.x / dom
     runs-on: ubuntu-latest
@@ -77,3 +155,63 @@ jobs:
       - name: test
         run: npm test -- -w 1 --coverage
     needs: setup
+
+  react-16-lib:
+    name: react@16.x / lib
+    runs-on: ubuntu-latest
+    env:
+      REACT: 16
+    steps:
+      - name: checkout
+        uses: actions/checkout@master
+
+      - name: restore cache from node_modules
+        uses: actions/cache@v2
+        with:
+          path: node_modules
+          key: node_modules
+
+      - name: restore cache from lib
+        uses: actions/cache@v2
+        with:
+          path: lib
+          key: lib-${{ github.sha }}
+
+      - name: install react 16
+        run: npm run install-react-16
+
+      - name: test
+        run: npm test
+        env:
+          LIB_DIR: lib
+    needs: compile
+
+  react-16-es:
+    name: react@16.x / es
+    runs-on: ubuntu-latest
+    env:
+      REACT: 16
+    steps:
+      - name: checkout
+        uses: actions/checkout@master
+
+      - name: restore cache from node_modules
+        uses: actions/cache@v2
+        with:
+          path: node_modules
+          key: node_modules
+
+      - name: restore cache from es
+        uses: actions/cache@v2
+        with:
+          path: es
+          key: es-${{ github.sha }}
+
+      - name: install react 16
+        run: npm run install-react-16
+
+      - name: test
+        run: npm test
+        env:
+          LIB_DIR: es
+    needs: compile

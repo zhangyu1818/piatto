@@ -1,7 +1,7 @@
 import React from 'react'
 import { render } from '@testing-library/react'
 import { ConfigProvider } from 'piatto'
-import { ConfigContext } from '../../components/config-provider'
+import { ConfigContext } from 'piatto/config-provider'
 import mountTest from '../shared/mountTest'
 
 describe('ConfigProvider', () => {
