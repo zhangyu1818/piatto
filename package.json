@@ -18,6 +18,8 @@
     "test:update": "jest -u",
     "test:coverage": "jest --coverage",
     "storybook:build": "build-storybook",
+    "stroybook:deploy": "npm run storybook:build && npm run gh-pages",
+    "gh-pages": "gh-pages -d storybook-static",
     "lint": "tsc --noEmit && npm run lint:script && npm run lint:style",
     "lint:script": "eslint . --ext '.js,.jsx,.ts,.tsx'",
     "lint:style": "stylelint '{site,components}/**/*.less' --syntax less",
