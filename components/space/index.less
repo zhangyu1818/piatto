@@ -1,0 +1,44 @@
+@import '../styles/theme';
+
+@space-prefix-class: ~'@{prefix-class}-space';
+
+.@{space-prefix-class} {
+  display: flex;
+
+  &.@{space-prefix-class}-horizontal {
+    flex-direction: row;
+  }
+
+  &.@{space-prefix-class}-vertical {
+    flex-direction: column;
+  }
+
+  &.@{space-prefix-class}-gap-small {
+    gap: @space-small;
+  }
+
+  &.@{space-prefix-class}-gap-normal {
+    gap: @space-normal;
+  }
+
+  &.@{space-prefix-class}-gap-large {
+    gap: @space-large;
+  }
+
+  &.@{space-prefix-class}-align-start {
+    align-items: flex-start;
+  }
+
+  &.@{space-prefix-class}-align-center {
+    align-items: center;
+  }
+
+  &.@{space-prefix-class}-align-end {
+    align-items: flex-end;
+  }
+  &-item {
+    &:empty {
+      display: none;
+    }
+  }
+}
